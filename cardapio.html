@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cardápio — Chácara Lago JB</title>
+  <meta name="description" content="Cardápio da Chácara Lago JB: comidas e bebidas." />
+  <meta name="theme-color" content="#1c6ea4" />
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <main class="menu-page">
+    <div class="menu-hero">
+      <img class="menu-logo-full" src="img/logo.png" alt="Chácara Lago JB" />
+      <h1>Cardápio</h1>
+      <p>Chácara Lago JB • Vila Amazônia, Parintins • peça e pague na hora</p>
+    </div>
+
+    <!-- Abas Comida / Bebida -->
+    <div class="tabs" role="tablist">
+      <button class="tab is-active" data-tab="comida" role="tab">🍽️ Comida</button>
+      <button class="tab" data-tab="bebida" role="tab">🥤 Bebida</button>
+    </div>
+
+    <!-- Gerado automaticamente a partir de menu.js -->
+    <div id="menu-comida" class="menu-panel"></div>
+    <div id="menu-bebida" class="menu-panel" hidden></div>
+
+    <div class="menu-back">
+      <a href="index.html">← Conheça a Chácara Lago JB</a>
+    </div>
+  </main>
+
+  <a class="whats-float" href="https://wa.me/5592993967080" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+
+  <script src="menu.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

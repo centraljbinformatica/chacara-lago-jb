@@ -1,0 +1,7 @@
+# Pasta de mídia bruta (fotos/vídeos originais e pesados).
+# O site usa as versões já otimizadas em img/, então isso não precisa ir pro ar.
+midia/
+
+# Arquivos de sistema
+Thumbs.db
+.DS_Store

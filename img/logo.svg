@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Chácara Lago JB">
+  <defs>
+    <clipPath id="rounded"><rect x="2" y="2" width="116" height="116" rx="28"/></clipPath>
+  </defs>
+  <g clip-path="url(#rounded)">
+    <!-- fundo azul-marinho -->
+    <rect x="2" y="2" width="116" height="116" fill="#1d3f70"/>
+    <!-- sol laranja -->
+    <circle cx="90" cy="32" r="13" fill="#f47a1d"/>
+    <!-- monograma JB -->
+    <text x="60" y="68" text-anchor="middle" font-family="'Fraunces', Georgia, serif"
+          font-size="52" font-weight="700" fill="#ffffff" letter-spacing="-2">JB</text>
+    <!-- ondas -->
+    <path d="M12 92 q11 -9 22 0 t22 0 t22 0 t22 0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+    <path d="M12 103 q11 -9 22 0 t22 0 t22 0 t22 0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+  </g>
+</svg>

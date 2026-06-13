@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerar QR Code do Cardápio — Chácara Lago JB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml" />
+  <!-- Biblioteca que desenha o QR Code -->
+  <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+</head>
+<body>
+
+  <div class="qr-wrap">
+    <p class="eyebrow">Ferramenta interna</p>
+    <h1 style="font-family:'Cinzel',serif;font-size:32px;">QR Code do Cardápio</h1>
+    <p class="section-desc">
+      Cole abaixo o endereço do seu cardápio publicado (ex:
+      <code>https://seu-usuario.github.io/chacara-lago-jb/cardapio.html</code>),
+      gere o QR e baixe pra imprimir e colar nas mesas.
+    </p>
+
+    <div class="qr-box">
+      <div class="form" style="box-shadow:none;border:none;padding:0;">
+        <label for="url">Endereço do cardápio</label>
+        <input id="url" type="url" placeholder="https://...cardapio.html" />
+        <button class="btn btn-azul" onclick="gerar()" style="width:100%;margin-top:18px;">Gerar QR Code</button>
+      </div>
+
+      <div id="qrcode"></div>
+
+      <a id="baixar" class="btn btn-ghost" style="display:none;" download="qrcode-cardapio.png">⬇️ Baixar imagem</a>
+    </div>
+
+    <p class="note">Dica: imprima com a frase “Escaneie e veja o cardápio 📱” em cima do QR.</p>
+  </div>
+
+  <script>
+    let qr;
+    function gerar() {
+      const url = document.getElementById("url").value.trim();
+      if (!url) { alert("Cole o endereço do cardápio primeiro."); return; }
+      const box = document.getElementById("qrcode");
+      box.innerHTML = "";
+      qr = new QRCode(box, { text: url, width: 240, height: 240, colorDark: "#0f4c75", colorLight: "#ffffff" });
+      // prepara o botão de download
+      setTimeout(() => {
+        const img = box.querySelector("img") || box.querySelector("canvas");
+        const link = document.getElementById("baixar");
+        if (img) {
+          link.href = img.src || img.toDataURL("image/png");
+          link.style.display = "inline-block";
+        }
+      }, 300);
+    }
+  </script>
+</body>
+</html>
