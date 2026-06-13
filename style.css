@@ -84,7 +84,7 @@ img { max-width: 100%; display: block; }
   position: relative; min-height: 84vh;
   display: grid; place-items: center; text-align: center;
   padding: 60px 20px;
-  background: #122a4e url('img/capa-poster.jpg') center/cover no-repeat; /* reserva, se o vídeo falhar */
+  background: #122a4e url('img/praia-sol.jpg') center/cover no-repeat; /* imagem bonita, caso o vídeo não toque */
   color: #fff; overflow: hidden;
 }
 .hero-video {

@@ -12,12 +12,11 @@ if (elAno) elAno.textContent = new Date().getFullYear();
 const heroVideo = document.getElementById("heroVideo");
 if (heroVideo) {
   heroVideo.muted = true; // mudo é obrigatório pro autoplay no celular
-  const tocar = () => { const p = heroVideo.play(); if (p) p.catch(() => {}); };
-  tocar();
-  heroVideo.addEventListener("loadeddata", tocar);
-  ["touchstart", "click", "scroll"].forEach((ev) =>
-    window.addEventListener(ev, tocar, { once: true, passive: true })
-  );
+  const p = heroVideo.play();
+  if (p && p.catch) {
+    // se o navegador bloquear o autoplay, esconde o vídeo e fica a imagem bonita (sem botão de play)
+    p.catch(() => { heroVideo.style.display = "none"; });
+  }
 }
 
 /* ---- ANIMAÇÃO AO ROLAR: elementos surgem suaves quando entram na tela ---- */
