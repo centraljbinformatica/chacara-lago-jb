@@ -8,6 +8,18 @@
 const elAno = document.getElementById("ano");
 if (elAno) elAno.textContent = new Date().getFullYear();
 
+/* ---- VÍDEO DA CAPA: garante que toca no celular (autoplay mobile é chato) ---- */
+const heroVideo = document.getElementById("heroVideo");
+if (heroVideo) {
+  heroVideo.muted = true; // mudo é obrigatório pro autoplay no celular
+  const tocar = () => { const p = heroVideo.play(); if (p) p.catch(() => {}); };
+  tocar();
+  heroVideo.addEventListener("loadeddata", tocar);
+  ["touchstart", "click", "scroll"].forEach((ev) =>
+    window.addEventListener(ev, tocar, { once: true, passive: true })
+  );
+}
+
 /* ---- ANIMAÇÃO AO ROLAR: elementos surgem suaves quando entram na tela ---- */
 document.documentElement.classList.add("js");
 const alvosReveal = document.querySelectorAll(
