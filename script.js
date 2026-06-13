@@ -80,6 +80,30 @@ if (painelComida && painelBebida && typeof CARDAPIO !== "undefined") {
   });
 }
 
+/* ---- PARALLAX das faixas de foto (funciona no PC e no celular) ---- */
+const bands = document.querySelectorAll(".photo-band");
+if (bands.length) {
+  let ticking = false;
+  function parallax() {
+    const vh = window.innerHeight;
+    bands.forEach((band) => {
+      const bg = band.querySelector(".pb-bg");
+      if (!bg) return;
+      const rect = band.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > vh) return; // fora da tela: nem mexe
+      const progress = (rect.top + rect.height / 2 - vh / 2) / vh; // ~ -1 (embaixo) a +1 (em cima)
+      bg.style.transform = `translateY(${(progress * -50).toFixed(1)}px)`;
+    });
+    ticking = false;
+  }
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(parallax); }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", parallax);
+  parallax();
+}
+
 /* ---- GALERIA: clicar pra ampliar (lightbox) ---- */
 const galeria = Array.from(document.querySelectorAll(".gallery-item"));
 const lb = document.getElementById("lightbox");

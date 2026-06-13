@@ -117,15 +117,17 @@ img { max-width: 100%; display: block; }
 .photo-band {
   position: relative; min-height: 62vh;
   display: grid; place-items: center; text-align: center; color: #fff;
-  padding: 60px 20px;
-  background-size: cover; background-position: center; background-attachment: fixed;
-  overflow: hidden;
+  padding: 60px 20px; overflow: hidden;
 }
-.photo-band::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,42,78,.35), rgba(12,24,46,.6)); }
-.photo-band .pb-text { position: relative; z-index: 1; max-width: 720px; }
+/* a imagem fica numa camada própria, um pouco maior, que desliza no scroll (parallax que funciona no celular também) */
+.photo-band .pb-bg {
+  position: absolute; left: 0; right: 0; top: -16%; height: 132%;
+  background-size: cover; background-position: center; z-index: 0; will-change: transform;
+}
+.photo-band::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(18,42,78,.35), rgba(12,24,46,.6)); }
+.photo-band .pb-text { position: relative; z-index: 2; max-width: 720px; }
 .photo-band h2 { color: #fff; font-size: clamp(28px, 5.5vw, 50px); }
-/* no celular o "fixed" trava/buga, então volta ao normal */
-@media (max-width: 820px) { .photo-band { background-attachment: scroll; min-height: 46vh; } }
+@media (max-width: 820px) { .photo-band { min-height: 46vh; } }
 
 /* ======================= SEÇÕES ======================= */
 .section { max-width: 1000px; margin: 0 auto; padding: 70px 20px; }
