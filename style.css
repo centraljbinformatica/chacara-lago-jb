@@ -60,6 +60,8 @@ img { max-width: 100%; display: block; }
 .nav { display: flex; gap: 22px; }
 .nav a { text-decoration: none; color: var(--cinza); font-weight: 500; font-size: 15px; transition: color .2s; }
 .nav a:hover { color: var(--azul); }
+/* botão ☰ aparece só no celular */
+.nav-toggle { display: none; background: none; border: none; color: var(--azul); font-size: 26px; line-height: 1; cursor: pointer; padding: 6px; }
 
 /* ======================= BOTÕES ======================= */
 .btn {
@@ -284,12 +286,20 @@ code { background: #eef2f6; padding: 1px 6px; border-radius: 6px; font-size: .9e
 
 /* ======================= CELULAR ======================= */
 @media (max-width: 600px) {
-  .nav { display: none; }
   .section { padding: 50px 18px; }
   .hero { min-height: 76vh; }
-  /* logo centralizada no celular (no desktop fica à esquerda) */
-  .topbar { justify-content: center; }
+  /* logo centralizada; botão de menu no canto direito */
+  .topbar { position: relative; justify-content: center; }
+  .nav-toggle { display: block; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); }
   .brand-logo-full { height: 46px; }
+  /* menu vira lista que abre embaixo da barra */
+  .nav {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; gap: 0;
+    background: #fff; border-bottom: 1px solid var(--borda); box-shadow: var(--sombra); padding: 6px 0;
+  }
+  .nav.open { display: flex; }
+  .nav a { padding: 13px 22px; font-size: 16px; }
   /* título numa linha só */
   .hero h1 { font-size: clamp(26px, 7.6vw, 40px); letter-spacing: 0; white-space: nowrap; }
 }

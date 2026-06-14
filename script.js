@@ -8,6 +8,25 @@
 const elAno = document.getElementById("ano");
 if (elAno) elAno.textContent = new Date().getFullYear();
 
+/* ---- MENU MOBILE: botão ☰ abre/fecha a lista ---- */
+const navToggle = document.querySelector(".nav-toggle");
+const navMenu = document.querySelector(".nav");
+if (navToggle && navMenu) {
+  navToggle.addEventListener("click", () => {
+    const aberto = navMenu.classList.toggle("open");
+    navToggle.setAttribute("aria-expanded", aberto ? "true" : "false");
+    navToggle.textContent = aberto ? "✕" : "☰";
+  });
+  // fecha ao clicar num item
+  navMenu.querySelectorAll("a").forEach((a) =>
+    a.addEventListener("click", () => {
+      navMenu.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.textContent = "☰";
+    })
+  );
+}
+
 /* ---- VÍDEO DA CAPA: garante que toca no celular (autoplay mobile é chato) ---- */
 const heroVideo = document.getElementById("heroVideo");
 if (heroVideo) {
