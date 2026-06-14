@@ -46,11 +46,11 @@ const CARDAPIO = {
       categoria: "Alcoólicos",
       icone: "🍺",
       itens: [
-        { nome: "Corona",              desc: "", preco: "15,00", img: "img/cardapio/corona.jpg" },
-        { nome: "Heineken",            desc: "", preco: "12,00", img: "img/cardapio/heineken.jpg" },
-        { nome: "Cabaré ICE",          desc: "", preco: "12,00", img: "img/cardapio/cabare-ice.jpg" },
+        { nome: "Corona",              desc: "", preco: "10,00", img: "img/cardapio/corona.jpg" },
+        { nome: "Heineken",            desc: "", preco: "10,00", img: "img/cardapio/heineken.jpg" },
+        { nome: "Cabaré ICE",          desc: "", preco: "10,00", img: "img/cardapio/cabare-ice.jpg" },
         { nome: "Budweiser",           desc: "", preco: "10,00", img: "img/cardapio/budweiser.jpg" },
-        { nome: "Original Antárctica", desc: "", preco: "8,00",  img: "img/cardapio/antarctica.jpg" },
+        { nome: "Original Antárctica", desc: "", preco: "5,00",  img: "img/cardapio/antarctica.jpg" },
       ],
     },
     {
@@ -67,8 +67,8 @@ const CARDAPIO = {
       icone: "💧",
       nota: "Garrafa de 500ml.",
       itens: [
-        { nome: "Água Mineral sem gás", desc: "", preco: "5,00", img: "img/cardapio/agua-sem-gas.jpg" },
-        { nome: "Água Mineral com gás", desc: "", preco: "6,00", img: "img/cardapio/agua-com-gas.jpg" },
+        { nome: "Água Mineral sem gás", desc: "", preco: "3,00", img: "img/cardapio/agua-sem-gas.jpg" },
+        { nome: "Água Mineral com gás", desc: "", preco: "3,00", img: "img/cardapio/agua-com-gas.jpg" },
       ],
     },
   ],
