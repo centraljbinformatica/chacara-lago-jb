@@ -102,8 +102,10 @@ if (bands.length) {
       if (!bg) return;
       const rect = band.getBoundingClientRect();
       if (rect.bottom < 0 || rect.top > vh) return; // fora da tela: nem mexe
-      const progress = (rect.top + rect.height / 2 - vh / 2) / vh; // ~ -1 (embaixo) a +1 (em cima)
-      bg.style.transform = `translateY(${(progress * -50).toFixed(1)}px)`;
+      let progress = (rect.top + rect.height / 2 - vh / 2) / vh; // ~ -1 (em cima) a +1 (embaixo)
+      progress = Math.max(-1, Math.min(1, progress));
+      // desliza proporcional à altura da faixa (movimento mais forte, sem abrir brecha)
+      bg.style.transform = `translateY(${(progress * rect.height * -0.18).toFixed(1)}px)`;
     });
     ticking = false;
   }

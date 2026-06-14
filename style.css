@@ -122,7 +122,7 @@ img { max-width: 100%; display: block; }
 }
 /* a imagem fica numa camada própria, um pouco maior, que desliza no scroll (parallax que funciona no celular também) */
 .photo-band .pb-bg {
-  position: absolute; left: 0; right: 0; top: -16%; height: 132%;
+  position: absolute; left: 0; right: 0; top: -22%; height: 144%;
   background-size: cover; background-position: center; z-index: 0; will-change: transform;
 }
 .photo-band::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(18,42,78,.35), rgba(12,24,46,.6)); }
