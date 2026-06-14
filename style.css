@@ -157,7 +157,7 @@ code { background: #eef2f6; padding: 1px 6px; border-radius: 6px; font-size: .9e
 
 /* ======================= GALERIA (PC: 2 fileiras de 5, clicável) ======================= */
 .gallery-wrap { position: relative; }
-.gallery { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .gallery-item {
   width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;
   border-radius: 14px; cursor: pointer; background: #dfe7ef;
