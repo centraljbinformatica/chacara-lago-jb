@@ -84,7 +84,7 @@ img { max-width: 100%; display: block; }
   position: relative; min-height: 84vh;
   display: grid; place-items: center; text-align: center;
   padding: 60px 20px;
-  background: #122a4e url('img/praia-sol.jpg') center/cover no-repeat; /* imagem bonita, caso o vídeo não toque */
+  background: #122a4e url('img/capa.jpg') center/cover no-repeat; /* imagem onde a água encontra a areia, caso o vídeo não toque */
   color: #fff; overflow: hidden;
 }
 .hero-video {
@@ -291,5 +291,5 @@ code { background: #eef2f6; padding: 1px 6px; border-radius: 6px; font-size: .9e
   .topbar { justify-content: center; }
   .brand-logo-full { height: 46px; }
   /* título numa linha só */
-  .hero h1 { font-size: clamp(23px, 7vw, 34px); letter-spacing: 0; white-space: nowrap; }
+  .hero h1 { font-size: clamp(26px, 7.6vw, 40px); letter-spacing: 0; white-space: nowrap; }
 }
