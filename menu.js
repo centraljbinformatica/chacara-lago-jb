@@ -55,9 +55,8 @@ const CARDAPIO = {
     {
       categoria: "Drinks",
       icone: "🍹",
-      nota: "Monte com gelo normal ou gelo de sabor (suco de fruta congelado).",
       itens: [
-        { nome: "Caipirinha",         desc: "Limão, açúcar e cachaça",         preco: "12,00", img: "img/cardapio/caipirinha.jpg" },
+        { nome: "Caipirinha",         desc: "Limão e açúcar, com cachaça ou vodka", preco: "12,00", img: "img/cardapio/caipirinha.jpg" },
         { nome: "Gin com Energético", desc: "Na taça, com gin e energético",   preco: "15,00", img: "img/cardapio/gin-energetico.jpg" },
         { nome: "Vodka Tropical",     desc: "Na taça, com Smirnoff e energético", preco: "15,00", img: "img/cardapio/vodka-tropical.jpg" },
         { nome: "Cabaré ICE",         desc: "",                                preco: "10,00", img: "img/cardapio/cabare-ice.jpg" },
