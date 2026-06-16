@@ -57,10 +57,10 @@ const CARDAPIO = {
       icone: "🍹",
       nota: "Monte com gelo normal ou gelo de sabor (suco de fruta congelado).",
       itens: [
-        { nome: "Caipirinha",          desc: "Limão, açúcar e cachaça", preco: "12,00", img: "" },
-        { nome: "Gin com Energético",  desc: "Gin, energético e gelo",  preco: "15,00", img: "" },
-        { nome: "Vodka com Refri",     desc: "Vodka, refrigerante e gelo", preco: "12,00", img: "" },
-        { nome: "Cabaré ICE",          desc: "",                        preco: "10,00", img: "img/cardapio/cabare-ice.jpg" },
+        { nome: "Caipirinha",         desc: "Limão, açúcar e cachaça",         preco: "12,00", img: "img/cardapio/caipirinha.jpg" },
+        { nome: "Gin com Energético", desc: "Na taça, com gin e energético",   preco: "15,00", img: "img/cardapio/gin-energetico.jpg" },
+        { nome: "Vodka Tropical",     desc: "Na taça, com Smirnoff e energético", preco: "15,00", img: "img/cardapio/vodka-tropical.jpg" },
+        { nome: "Cabaré ICE",         desc: "",                                preco: "10,00", img: "img/cardapio/cabare-ice.jpg" },
       ],
     },
     {
@@ -77,7 +77,7 @@ const CARDAPIO = {
       icone: "💧",
       nota: "Garrafa de 500ml.",
       itens: [
-        { nome: "Água de Coco",         desc: "Natural, geladinha", preco: "10,00", img: "" },
+        { nome: "Água de Coco",         desc: "Natural, geladinha", preco: "10,00", img: "img/cardapio/agua-coco.jpg" },
         { nome: "Água Mineral sem gás", desc: "",                   preco: "3,00",  img: "img/cardapio/agua-sem-gas.jpg" },
         { nome: "Água Mineral com gás", desc: "",                   preco: "3,00",  img: "img/cardapio/agua-com-gas.jpg" },
       ],
