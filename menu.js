@@ -54,6 +54,13 @@ const CARDAPIO = {
       ],
     },
     {
+      categoria: "Drinks",
+      icone: "🍹",
+      itens: [
+        { nome: "Caipirinha", desc: "Limão, açúcar e cachaça", preco: "12,00", img: "" },
+      ],
+    },
+    {
       categoria: "Refrigerantes",
       icone: "🥤",
       nota: "Servidos em lata.",
@@ -67,8 +74,9 @@ const CARDAPIO = {
       icone: "💧",
       nota: "Garrafa de 500ml.",
       itens: [
-        { nome: "Água Mineral sem gás", desc: "", preco: "3,00", img: "img/cardapio/agua-sem-gas.jpg" },
-        { nome: "Água Mineral com gás", desc: "", preco: "3,00", img: "img/cardapio/agua-com-gas.jpg" },
+        { nome: "Água de Coco",         desc: "Natural, geladinha", preco: "10,00", img: "" },
+        { nome: "Água Mineral sem gás", desc: "",                   preco: "3,00",  img: "img/cardapio/agua-sem-gas.jpg" },
+        { nome: "Água Mineral com gás", desc: "",                   preco: "3,00",  img: "img/cardapio/agua-com-gas.jpg" },
       ],
     },
   ],
