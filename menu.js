@@ -53,14 +53,19 @@ const CARDAPIO = {
       ],
     },
     {
+      categoria: "Drinks do Festival",
+      icone: "🐂",
+      itens: [
+        { nome: "Garantido",  desc: "Vermelho · gin, energético de melancia e gelo", preco: "15,00", img: "img/cardapio/garantido.jpg" },
+        { nome: "Caprichoso", desc: "Azul · curaçau, refrigerante de limão e gelo",  preco: "15,00", img: "img/cardapio/caprichoso.jpg" },
+      ],
+    },
+    {
       categoria: "Drinks",
       icone: "🍹",
       itens: [
-        { nome: "Caipirinha",      desc: "Limão e açúcar, com cachaça ou vodka", preco: "12,00", img: "img/cardapio/caipirinha.jpg" },
-        { nome: "Vodka Garantido", desc: "Vermelho, na taça, com vodka e energético", preco: "15,00", img: "img/cardapio/garantido.jpg" },
-        { nome: "Gin Caprichoso",  desc: "Azul, na taça, com gin e curaçau",     preco: "15,00", img: "img/cardapio/caprichoso.jpg" },
-        { nome: "Pôr do Sol",      desc: "Amarelo, na taça, com vodka e maracujá", preco: "15,00", img: "img/cardapio/por-do-sol.jpg" },
-        { nome: "Cabaré ICE",      desc: "",                                     preco: "10,00", img: "img/cardapio/cabare-ice.jpg" },
+        { nome: "Gin Tropical", desc: "Gin, energético tropical e gelo", preco: "15,00", img: "img/cardapio/gin-tropical.jpg" },
+        { nome: "Cabaré ICE",   desc: "",                                preco: "10,00", img: "img/cardapio/cabare-ice.jpg" },
       ],
     },
     {
