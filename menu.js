@@ -43,12 +43,11 @@ const CARDAPIO = {
 
   bebida: [
     {
-      categoria: "Alcoólicos",
+      categoria: "Cervejas",
       icone: "🍺",
       itens: [
         { nome: "Corona",              desc: "", preco: "10,00", img: "img/cardapio/corona.jpg" },
         { nome: "Heineken",            desc: "", preco: "10,00", img: "img/cardapio/heineken.jpg" },
-        { nome: "Cabaré ICE",          desc: "", preco: "10,00", img: "img/cardapio/cabare-ice.jpg" },
         { nome: "Budweiser",           desc: "", preco: "10,00", img: "img/cardapio/budweiser.jpg" },
         { nome: "Original Antárctica", desc: "", preco: "5,00",  img: "img/cardapio/antarctica.jpg" },
       ],
@@ -56,8 +55,12 @@ const CARDAPIO = {
     {
       categoria: "Drinks",
       icone: "🍹",
+      nota: "Monte com gelo normal ou gelo de sabor (suco de fruta congelado).",
       itens: [
-        { nome: "Caipirinha", desc: "Limão, açúcar e cachaça", preco: "12,00", img: "" },
+        { nome: "Caipirinha",          desc: "Limão, açúcar e cachaça", preco: "12,00", img: "" },
+        { nome: "Gin com Energético",  desc: "Gin, energético e gelo",  preco: "15,00", img: "" },
+        { nome: "Vodka com Refri",     desc: "Vodka, refrigerante e gelo", preco: "12,00", img: "" },
+        { nome: "Cabaré ICE",          desc: "",                        preco: "10,00", img: "img/cardapio/cabare-ice.jpg" },
       ],
     },
     {
