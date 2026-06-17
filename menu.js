@@ -77,7 +77,7 @@ const CARDAPIO = {
       nota: "Servidos em lata.",
       itens: [
         { nome: "Coca-Cola", desc: "Normal ou Zero",        preco: "6,00", img: "img/cardapio/coca.jpg" },
-        { nome: "Fanta",     desc: "Laranja ou Uva",         preco: "6,00", img: "img/cardapio/fanta.jpg" },
+        { nome: "Fanta",     desc: "Laranja",                preco: "6,00", img: "img/cardapio/fanta.jpg" },
         { nome: "Baré",      desc: "Refrigerante regional",  preco: "6,00", img: "img/cardapio/bare.jpg" },
       ],
     },
