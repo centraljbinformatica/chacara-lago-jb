@@ -56,16 +56,17 @@ const CARDAPIO = {
       categoria: "Garantido Vs Caprichoso",
       icone: "🐂",
       itens: [
-        { nome: "Garantido",  desc: "Vodka, energético de melancia e gelo (ou gin)", preco: "15,00", img: "img/cardapio/garantido.jpg" },
-        { nome: "Caprichoso", desc: "Curaçau, refrigerante de limão e gelo",         preco: "15,00", img: "img/cardapio/caprichoso.jpg" },
+        { nome: "Garantido",  desc: "Vodka, energético de melancia e gelo (ou gin)", preco: "20,00", img: "img/cardapio/garantido.jpg" },
+        { nome: "Caprichoso", desc: "Curaçau, refrigerante de limão e gelo",         preco: "20,00", img: "img/cardapio/caprichoso.jpg" },
       ],
     },
     {
       categoria: "Drinks",
       icone: "🍹",
       itens: [
-        { nome: "Gin Tropical", desc: "Gin, energético tropical e gelo (ou vodka)", preco: "15,00", img: "img/cardapio/gin-tropical.jpg" },
-        { nome: "Cabaré ICE",   desc: "",                                preco: "10,00", img: "img/cardapio/cabare-ice.jpg" },
+        { nome: "Gin Tropical",  desc: "Gin, energético tropical e gelo (ou vodka)", preco: "20,00", img: "img/cardapio/gin-tropical.jpg" },
+        { nome: "Cabaré ICE",    desc: "",                                preco: "10,00", img: "img/cardapio/cabare-ice.jpg" },
+        { nome: "Skarloff ICE",  desc: "",                                preco: "10,00", img: "img/cardapio/skarloff-ice.jpg" },
       ],
     },
     {
