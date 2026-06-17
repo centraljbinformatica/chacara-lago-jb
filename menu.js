@@ -53,22 +53,25 @@ const CARDAPIO = {
       ],
     },
     {
-      categoria: "Garantido Vs Caprichoso",
-      icone: "🐂",
-      nota: "🔥 Promoção: 2 drinks por R$30.",
-      itens: [
-        { nome: "Garantido",  desc: "Vodka, energético de melancia e gelo (ou gin)", preco: "20,00", img: "img/cardapio/garantido.jpg" },
-        { nome: "Caprichoso", desc: "Curaçau, refrigerante de limão e gelo",         preco: "20,00", img: "img/cardapio/caprichoso.jpg" },
-      ],
-    },
-    {
       categoria: "Drinks",
       icone: "🍹",
-      nota: "🔥 Promoção: 2 drinks (R$20) por R$30.",
-      itens: [
-        { nome: "Gin Tropical",  desc: "Gin, energético tropical e gelo (ou vodka)", preco: "20,00", img: "img/cardapio/gin-tropical.jpg" },
-        { nome: "Cabaré ICE",    desc: "",                                preco: "10,00", img: "img/cardapio/cabare-ice.jpg" },
-        { nome: "Skarloff ICE",  desc: "",                                preco: "10,00", img: "img/cardapio/skarloff-ice.jpg" },
+      promo: "2 drinks por R$30",
+      subgrupos: [
+        {
+          titulo: "🐂 Garantido Vs Caprichoso",
+          itens: [
+            { nome: "Garantido",    desc: "Vodka, energético de melancia e gelo (ou gin)", preco: "20,00", img: "img/cardapio/garantido.jpg" },
+            { nome: "Caprichoso",   desc: "Curaçau, refrigerante de limão e gelo",         preco: "20,00", img: "img/cardapio/caprichoso.jpg" },
+            { nome: "Gin Tropical", desc: "Gin, energético tropical e gelo (ou vodka)",    preco: "20,00", img: "img/cardapio/gin-tropical.jpg" },
+          ],
+        },
+        {
+          titulo: "Long Neck",
+          itens: [
+            { nome: "Cabaré ICE",   desc: "", preco: "10,00", img: "img/cardapio/cabare-ice.jpg" },
+            { nome: "Skarloff ICE", desc: "", preco: "10,00", img: "img/cardapio/skarloff-ice.jpg" },
+          ],
+        },
       ],
     },
     {

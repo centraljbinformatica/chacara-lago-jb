@@ -265,6 +265,11 @@ code { background: #eef2f6; padding: 1px 6px; border-radius: 6px; font-size: .9e
 .menu-cat-title { font-family: "Inter", sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--azul); display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
 .menu-cat-title::after { content: ""; flex: 1; height: 2px; background: var(--borda); }
 .menu-cat-nota { font-size: 13px; color: var(--cinza); margin: -6px 0 12px; font-style: italic; }
+.menu-subcat-title { font-family: "Inter", sans-serif; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .8px; color: var(--laranja-esc); margin: 20px 0 6px; }
+.menu-subcat-title:first-of-type { margin-top: 4px; }
+.menu-promo { display: inline-flex; align-items: center; gap: 9px; margin: 2px 0 18px; padding: 9px 14px 9px 9px; background: linear-gradient(135deg, #ff8f33, var(--laranja-esc)); color: #fff; font-weight: 800; font-size: 15px; border-radius: 13px; transform: rotate(-1.8deg); box-shadow: 0 10px 22px rgba(217,100,26,.34); }
+.menu-promo-tag { background: #fff; color: var(--laranja-esc); font-size: 11px; font-weight: 900; letter-spacing: .4px; padding: 3px 8px; border-radius: 7px; white-space: nowrap; }
+.menu-promo-txt { white-space: nowrap; }
 .menu-item { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px dashed var(--borda); }
 .menu-item:last-child { border-bottom: none; }
 .mi-thumb { width: 64px; height: 64px; flex: 0 0 64px; border-radius: 12px; object-fit: cover; }

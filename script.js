@@ -62,16 +62,8 @@ if ("IntersectionObserver" in window) {
 }
 
 /* ---- CARDÁPIO: monta os itens a partir do menu.js ---- */
-function montarMenu(lista) {
-  return lista
-    .map(
-      (grupo) => `
-      <div class="menu-cat">
-        <h2 class="menu-cat-title">${grupo.categoria}</h2>
-        ${grupo.nota ? `<p class="menu-cat-nota">${grupo.nota}</p>` : ""}
-        ${grupo.itens
-          .map(
-            (it) => `
+function itemHTML(it, grupo) {
+  return `
           <div class="menu-item">
             ${
               it.img
@@ -83,11 +75,29 @@ function montarMenu(lista) {
               ${it.desc ? `<div class="mi-desc">${it.desc}</div>` : ""}
             </div>
             <div class="mi-price">${it.preco}</div>
-          </div>`
-          )
-          .join("")}
-      </div>`
-    )
+          </div>`;
+}
+
+function montarMenu(lista) {
+  return lista
+    .map((grupo) => {
+      const corpo = grupo.subgrupos
+        ? grupo.subgrupos
+            .map(
+              (sg) => `
+        <h3 class="menu-subcat-title">${sg.titulo}</h3>
+        ${sg.itens.map((it) => itemHTML(it, grupo)).join("")}`
+            )
+            .join("")
+        : grupo.itens.map((it) => itemHTML(it, grupo)).join("");
+      return `
+      <div class="menu-cat">
+        <h2 class="menu-cat-title">${grupo.categoria}</h2>
+        ${grupo.promo ? `<div class="menu-promo"><span class="menu-promo-tag">🔥 PROMO</span><span class="menu-promo-txt">${grupo.promo}</span></div>` : ""}
+        ${grupo.nota ? `<p class="menu-cat-nota">${grupo.nota}</p>` : ""}
+        ${corpo}
+      </div>`;
+    })
     .join("");
 }
 
