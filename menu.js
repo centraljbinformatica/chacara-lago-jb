@@ -55,6 +55,7 @@ const CARDAPIO = {
     {
       categoria: "Garantido Vs Caprichoso",
       icone: "🐂",
+      nota: "🔥 Promoção: 2 drinks por R$30.",
       itens: [
         { nome: "Garantido",  desc: "Vodka, energético de melancia e gelo (ou gin)", preco: "20,00", img: "img/cardapio/garantido.jpg" },
         { nome: "Caprichoso", desc: "Curaçau, refrigerante de limão e gelo",         preco: "20,00", img: "img/cardapio/caprichoso.jpg" },
@@ -63,6 +64,7 @@ const CARDAPIO = {
     {
       categoria: "Drinks",
       icone: "🍹",
+      nota: "🔥 Promoção: 2 drinks (R$20) por R$30.",
       itens: [
         { nome: "Gin Tropical",  desc: "Gin, energético tropical e gelo (ou vodka)", preco: "20,00", img: "img/cardapio/gin-tropical.jpg" },
         { nome: "Cabaré ICE",    desc: "",                                preco: "10,00", img: "img/cardapio/cabare-ice.jpg" },
@@ -74,8 +76,9 @@ const CARDAPIO = {
       icone: "🥤",
       nota: "Servidos em lata.",
       itens: [
-        { nome: "Coca-Cola", desc: "Normal ou Zero",        preco: "7,00", img: "img/cardapio/coca.jpg" },
-        { nome: "Baré",      desc: "Refrigerante regional",  preco: "5,00", img: "img/cardapio/bare.jpg" },
+        { nome: "Coca-Cola", desc: "Normal ou Zero",        preco: "6,00", img: "img/cardapio/coca.jpg" },
+        { nome: "Fanta",     desc: "Laranja ou Uva",         preco: "6,00", img: "img/cardapio/fanta.jpg" },
+        { nome: "Baré",      desc: "Refrigerante regional",  preco: "6,00", img: "img/cardapio/bare.jpg" },
       ],
     },
     {
@@ -85,7 +88,7 @@ const CARDAPIO = {
       itens: [
         { nome: "Água de Coco",         desc: "Natural, geladinha", preco: "10,00", img: "img/cardapio/agua-coco.jpg" },
         { nome: "Água Mineral sem gás", desc: "",                   preco: "3,00",  img: "img/cardapio/agua-sem-gas.jpg" },
-        { nome: "Água Mineral com gás", desc: "",                   preco: "3,00",  img: "img/cardapio/agua-com-gas.jpg" },
+        { nome: "Água Mineral com gás", desc: "",                   preco: "4,00",  img: "img/cardapio/agua-com-gas.jpg" },
       ],
     },
   ],
