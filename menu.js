@@ -62,7 +62,7 @@ const CARDAPIO = {
           itens: [
             { nome: "Caprichoso",   desc: "Curaçau, refrigerante de limão e gelo",         preco: "20,00", img: "img/cardapio/caprichoso.jpg" },
             { nome: "Garantido",    desc: "Vodka, energético de melancia e gelo (ou gin)", preco: "20,00", img: "img/cardapio/garantido.jpg" },
-            { nome: "Gin Tropical", desc: "Gin, energético tropical e gelo (ou vodka)",    preco: "20,00", img: "img/cardapio/gin-tropical.jpg" },
+            { nome: "Gin Tropical", desc: "Gin, energético tropical e gelo (ou vodka)",    preco: "20,00", img: "img/cardapio/gin-tropical.jpg", sep: true },
           ],
         },
         {

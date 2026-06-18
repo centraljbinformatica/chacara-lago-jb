@@ -95,7 +95,7 @@ function montarMenu(lista) {
             .map(
               (sg) => `
         <h3 class="menu-subcat-title">${sg.titulo}</h3>
-        ${sg.itens.map((it) => itemHTML(it, grupo)).join("")}`
+        ${sg.itens.map((it) => (it.sep ? '<div class="menu-mini-sep" aria-hidden="true"></div>' : "") + itemHTML(it, grupo)).join("")}`
             )
             .join("")
         : grupo.itens.map((it) => itemHTML(it, grupo)).join("");
