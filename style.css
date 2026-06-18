@@ -316,7 +316,7 @@ code { background: #eef2f6; padding: 1px 6px; border-radius: 6px; font-size: .9e
 }
 
 /* ============================================================
-   EFEITOS INTERATIVOS (morph de fotos, orbs e hover moderno)
+   EFEITOS INTERATIVOS (morph de fotos, ondas, números e hover moderno)
    ============================================================ */
 
 /* Transição de fotos controlada pelo scroll */
@@ -332,17 +332,6 @@ code { background: #eef2f6; padding: 1px 6px; border-radius: 6px; font-size: .9e
 .morph-hint { position: absolute; left: 0; right: 0; bottom: 6%; text-align: center; color: rgba(255,255,255,.9); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; z-index: 4; animation: morphHint 1.8s ease-in-out infinite; }
 @keyframes morphHint { 0%, 100% { transform: translateY(0); opacity: .65; } 50% { transform: translateY(7px); opacity: 1; } }
 
-/* Orbs decorativos (seção Sobre) */
-#sobre { position: relative; overflow: hidden; }
-#sobre > .section-head, #sobre > .features { position: relative; z-index: 1; }
-.orbs { position: absolute; inset: 0; z-index: 0; pointer-events: none; transition: transform .25s ease-out; }
-.orb { position: absolute; border-radius: 50%; filter: blur(38px); opacity: .5; will-change: transform; }
-.orb-1 { width: 260px; height: 260px; background: radial-gradient(circle at 35% 35%, var(--laranja), transparent 72%); top: 2%; left: 1%; animation: orbFloatA 9s ease-in-out infinite; }
-.orb-2 { width: 340px; height: 340px; background: radial-gradient(circle at 35% 35%, var(--azul), transparent 72%); bottom: 0; right: 2%; animation: orbFloatB 11s ease-in-out infinite; }
-.orb-3 { width: 200px; height: 200px; background: radial-gradient(circle at 35% 35%, #2aa0d8, transparent 72%); top: 40%; right: 30%; animation: orbFloatA 8s ease-in-out infinite reverse; }
-@keyframes orbFloatA { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(14px, -22px); } }
-@keyframes orbFloatB { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-18px, 16px); } }
-
 /* Hover moderno */
 .gallery-item { transition: transform .35s ease, box-shadow .35s ease; }
 .gallery-item:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 16px 32px rgba(18,42,78,.20); }
@@ -352,7 +341,7 @@ code { background: #eef2f6; padding: 1px 6px; border-radius: 6px; font-size: .9e
 .feature:hover .ico { transform: scale(1.18) rotate(-6deg); }
 
 @media (prefers-reduced-motion: reduce) {
-  .orb, .morph-hint { animation: none; }
+  .morph-hint { animation: none; }
 }
 
 /* ---- Divisores de onda animados ---- */

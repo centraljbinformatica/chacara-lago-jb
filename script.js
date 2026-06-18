@@ -180,19 +180,12 @@ if (morph) {
   morphUpdate();
 }
 
-/* ---- ORBS: leve movimento ao passar o mouse (só no PC) ---- */
-const orbsLayer = document.querySelector(".orbs");
-if (orbsLayer && window.matchMedia("(pointer:fine)").matches) {
-  window.addEventListener("mousemove", (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 26;
-    const y = (e.clientY / window.innerHeight - 0.5) * 26;
-    orbsLayer.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
-  }, { passive: true });
-}
-
-/* ---- NÚMEROS: contam de 0 até o valor quando aparecem na tela ---- */
+/* ---- NÚMEROS: contam de 0 até o valor quando aparecem na tela ----
+   O HTML já mostra o valor certo (ex: "25+", "10h"). Só animamos quando
+   a seção entra na tela; se o efeito não rodar, o valor correto permanece. */
 const nums = document.querySelectorAll(".stat-num");
-if (nums.length && "IntersectionObserver" in window) {
+const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (nums.length && !semMovimento && "IntersectionObserver" in window) {
   const numObs = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (!e.isIntersecting) return;
@@ -211,10 +204,8 @@ if (nums.length && "IntersectionObserver" in window) {
       }
       requestAnimationFrame(step);
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0.25 });
   nums.forEach((n) => numObs.observe(n));
-} else if (nums.length) {
-  nums.forEach((n) => { n.textContent = (n.dataset.target || "") + (n.dataset.suffix || ""); });
 }
 
 /* ---- TILT 3D nas fotos da galeria (só no PC) ---- */
