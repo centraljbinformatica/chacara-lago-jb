@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comanda — Chácara Lago JB</title>
+  <meta name="description" content="Comanda de pedidos da Chácara Lago JB." />
+  <meta name="theme-color" content="#1d3f70" />
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --azul:#1d3f70; --laranja:#f47a1d; --laranja-esc:#d9641a;
+      --fundo:#f6f8fb; --borda:#e3e9f0; --txt:#1f2a37; --suave:#6b7480;
+      --verde:#1f9d57;
+    }
+    *{box-sizing:border-box;}
+    html,body{margin:0;}
+    body{
+      font-family:'Inter',system-ui,sans-serif; color:var(--txt);
+      background:var(--fundo); padding-bottom:120px;
+    }
+
+    /* ---------- Cabeçalho ---------- */
+    .topo{
+      background:linear-gradient(135deg,var(--azul),#16345e);
+      color:#fff; padding:18px 16px 16px; text-align:center;
+    }
+    .topo img{height:46px; margin-bottom:6px;}
+    .topo h1{font-family:'Cinzel',serif; margin:0; font-size:1.25rem; letter-spacing:.5px;}
+    .topo p{margin:2px 0 0; font-size:.82rem; opacity:.85;}
+
+    .wrap{max-width:680px; margin:0 auto; padding:14px;}
+
+    /* ---------- Dados da mesa ---------- */
+    .dados{
+      display:grid; grid-template-columns:1fr 1fr; gap:10px;
+      background:#fff; border:1px solid var(--borda); border-radius:14px;
+      padding:14px; margin-bottom:14px;
+    }
+    .dados .full{grid-column:1 / -1;}
+    .campo{display:flex; flex-direction:column; gap:4px;}
+    .campo label{font-size:.72rem; font-weight:700; color:var(--suave); text-transform:uppercase; letter-spacing:.4px;}
+    .campo input{
+      font-family:inherit; font-size:.95rem; padding:9px 10px;
+      border:1px solid var(--borda); border-radius:9px; background:var(--fundo); color:var(--txt);
+    }
+    .campo input:focus{outline:none; border-color:var(--azul); background:#fff;}
+
+    /* ---------- Busca / filtro ---------- */
+    .barra{
+      display:flex; gap:8px; align-items:center; margin-bottom:12px;
+    }
+    .barra input{
+      flex:1; font-family:inherit; font-size:.95rem; padding:11px 14px;
+      border:1px solid var(--borda); border-radius:30px; background:#fff;
+    }
+    .barra input:focus{outline:none; border-color:var(--azul);}
+
+    /* ---------- Categorias e itens ---------- */
+    .cat-titulo{
+      font-family:'Cinzel',serif; color:var(--azul); font-size:1rem;
+      margin:18px 0 8px; padding-bottom:6px; border-bottom:2px solid var(--borda);
+      display:flex; align-items:center; gap:8px;
+    }
+    .item{
+      display:flex; align-items:center; gap:12px;
+      background:#fff; border:1px solid var(--borda); border-radius:12px;
+      padding:10px 12px; margin-bottom:8px; transition:border-color .15s, box-shadow .15s;
+    }
+    .item.ativo{border-color:var(--laranja); box-shadow:0 2px 10px rgba(244,122,29,.18);}
+    .item-info{flex:1; min-width:0;}
+    .item-nome{font-weight:700; font-size:.95rem; line-height:1.2;}
+    .item-desc{font-size:.76rem; color:var(--suave); margin-top:2px;}
+    .item-preco{font-weight:700; color:var(--laranja-esc); font-size:.9rem; white-space:nowrap;}
+
+    /* ---------- Stepper ---------- */
+    .step{display:flex; align-items:center; gap:2px; background:var(--fundo); border-radius:30px; padding:3px;}
+    .step button{
+      width:34px; height:34px; border:none; border-radius:50%; cursor:pointer;
+      font-size:1.2rem; font-weight:700; line-height:1; color:#fff;
+      display:flex; align-items:center; justify-content:center; transition:transform .1s, filter .15s;
+    }
+    .step button:active{transform:scale(.9);}
+    .step .menos{background:#aeb6c0;}
+    .step .mais{background:var(--laranja);}
+    .step .qtd{min-width:30px; text-align:center; font-weight:800; font-size:1rem; font-variant-numeric:tabular-nums;}
+    .item:not(.ativo) .menos{visibility:hidden;}
+    .item:not(.ativo) .qtd{color:var(--suave);}
+
+    .vazio{text-align:center; color:var(--suave); padding:30px 10px; font-size:.9rem;}
+
+    /* ---------- Barra de total (fixa) ---------- */
+    .rodape{
+      position:fixed; left:0; right:0; bottom:0; z-index:20;
+      background:#fff; border-top:1px solid var(--borda);
+      box-shadow:0 -4px 18px rgba(0,0,0,.08);
+      padding:12px 14px calc(12px + env(safe-area-inset-bottom));
+    }
+    .rodape-in{max-width:680px; margin:0 auto; display:flex; align-items:center; gap:12px;}
+    .total-box{flex:1;}
+    .total-label{font-size:.72rem; color:var(--suave); font-weight:700; text-transform:uppercase; letter-spacing:.4px;}
+    .total-val{font-size:1.6rem; font-weight:800; color:var(--azul); line-height:1; font-variant-numeric:tabular-nums;}
+    .total-itens{font-size:.74rem; color:var(--suave); margin-top:2px;}
+    .btn{
+      font-family:inherit; font-weight:700; font-size:.92rem; cursor:pointer;
+      border:none; border-radius:12px; padding:13px 18px; transition:filter .15s, transform .1s;
+    }
+    .btn:active{transform:scale(.97);}
+    .btn-limpar{background:var(--fundo); color:var(--suave); border:1px solid var(--borda);}
+    .btn-imprimir{background:linear-gradient(135deg,var(--laranja),var(--laranja-esc)); color:#fff;}
+    .btn-imprimir:hover{filter:brightness(1.05);}
+
+    .voltar{display:block; text-align:center; margin-top:18px; color:var(--azul); font-weight:600; text-decoration:none; font-size:.88rem;}
+
+    /* =========================================================
+       TICKET DE IMPRESSÃO (só aparece ao imprimir)
+       ========================================================= */
+    .ticket{display:none;}
+
+    @media print{
+      @page{ margin:6mm; }
+      body{background:#fff; padding:0;}
+      .topo,.wrap,.rodape{display:none !important;}
+      .ticket{
+        display:block; width:72mm; margin:0 auto;
+        font-family:'Inter',monospace; color:#000; font-size:12px;
+      }
+      .ticket *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+      .tk-head{text-align:center; border-bottom:2px dashed #000; padding-bottom:6px; margin-bottom:6px;}
+      .tk-head .tk-nome{font-family:'Cinzel',serif; font-weight:700; font-size:15px;}
+      .tk-head .tk-sub{font-size:10px; margin-top:2px;}
+      .tk-meta{font-size:11px; margin-bottom:6px; line-height:1.5;}
+      .tk-meta b{display:inline-block; min-width:48px;}
+      .tk-via{
+        text-align:center; font-weight:800; font-size:12px; letter-spacing:1px;
+        background:#000; color:#fff; padding:2px 0; margin:8px 0 6px;
+      }
+      .tk-linha{display:flex; justify-content:space-between; gap:8px; padding:2px 0; font-size:12px;}
+      .tk-linha .tk-q{font-weight:800; min-width:26px;}
+      .tk-linha .tk-n{flex:1;}
+      .tk-linha .tk-p{white-space:nowrap;}
+      .tk-sep{border-top:1px dashed #000; margin:6px 0;}
+      .tk-total{display:flex; justify-content:space-between; font-weight:800; font-size:15px; margin-top:4px;}
+      .tk-obs{font-size:11px; margin-top:6px; border-top:1px dashed #000; padding-top:4px;}
+      .tk-pe{text-align:center; font-size:10px; margin-top:8px; border-top:2px dashed #000; padding-top:6px;}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topo">
+    <img src="img/logo.png" alt="Chácara Lago JB" onerror="this.style.display='none'" />
+    <h1>Comanda</h1>
+    <p>Anote o pedido, confira o total e imprima</p>
+  </header>
+
+  <main class="wrap">
+    <!-- Dados da mesa -->
+    <section class="dados">
+      <div class="campo">
+        <label for="mesa">Mesa / Cliente</label>
+        <input id="mesa" type="text" placeholder="Ex.: Mesa 4" />
+      </div>
+      <div class="campo">
+        <label for="garcom">Garçom</label>
+        <input id="garcom" type="text" placeholder="Seu nome" />
+      </div>
+      <div class="campo full">
+        <label for="obs">Observações (ponto da carne, sem cebola, etc.)</label>
+        <input id="obs" type="text" placeholder="Opcional" />
+      </div>
+    </section>
+
+    <!-- Busca -->
+    <div class="barra">
+      <input id="busca" type="text" placeholder="🔎 Buscar item (ex.: espeto, coca, garantido)" />
+    </div>
+
+    <!-- Itens (gerado a partir de menu.js) -->
+    <div id="lista"></div>
+
+    <a class="voltar" href="index.html">← Voltar ao site</a>
+  </main>
+
+  <!-- Barra fixa de total -->
+  <div class="rodape">
+    <div class="rodape-in">
+      <button class="btn btn-limpar" id="btn-limpar">Limpar</button>
+      <div class="total-box">
+        <div class="total-label">Total</div>
+        <div class="total-val" id="total-val">R$ 0,00</div>
+        <div class="total-itens" id="total-itens">Nenhum item</div>
+      </div>
+      <button class="btn btn-imprimir" id="btn-imprimir">🖨️ Imprimir</button>
+    </div>
+  </div>
+
+  <!-- Ticket de impressão -->
+  <div class="ticket" id="ticket"></div>
+
+  <script src="menu.js"></script>
+  <script>
+  (function () {
+    "use strict";
+
+    // ---- Achata o cardápio em uma lista única de itens ----
+    function precoNum(p) { return parseFloat(String(p).replace(/\./g, "").replace(",", ".")) || 0; }
+    function precoFmt(n) { return "R$ " + n.toFixed(2).replace(".", ","); }
+
+    const grupos = [];
+    function addGrupo(categoria, icone, itens) {
+      grupos.push({ categoria, icone, itens });
+    }
+    (CARDAPIO.comida || []).concat(CARDAPIO.bebida || []).forEach((g) => {
+      if (g.subgrupos) {
+        // junta todos os subgrupos numa categoria só
+        const todos = g.subgrupos.reduce((acc, sg) => acc.concat(sg.itens), []);
+        addGrupo(g.categoria, g.icone, todos);
+      } else {
+        addGrupo(g.categoria, g.icone, g.itens);
+      }
+    });
+
+    // estado: chave única por item -> quantidade
+    const qtd = {};
+    let idSeq = 0;
+    grupos.forEach((g) => g.itens.forEach((it) => (it._id = "i" + idSeq++)));
+
+    // ---- Render da lista ----
+    const lista = document.getElementById("lista");
+    function render() {
+      lista.innerHTML = grupos.map((g) => `
+        <div class="cat-bloco" data-cat="${g.categoria}">
+          <h2 class="cat-titulo">${g.icone || ""} ${g.categoria}</h2>
+          ${g.itens.map((it) => {
+            const n = precoNum(it.preco);
+            return `
+            <div class="item" data-id="${it._id}" data-nome="${it.nome.toLowerCase()}">
+              <div class="item-info">
+                <div class="item-nome">${it.nome}</div>
+                ${it.desc ? `<div class="item-desc">${it.desc}</div>` : ""}
+              </div>
+              <div class="item-preco">${precoFmt(n)}</div>
+              <div class="step">
+                <button class="menos" data-act="-" aria-label="Tirar um">−</button>
+                <span class="qtd">0</span>
+                <button class="mais" data-act="+" aria-label="Adicionar um">+</button>
+              </div>
+            </div>`;
+          }).join("")}
+        </div>`).join("");
+      pintarTudo();
+    }
+
+    function itemPorId(id) {
+      for (const g of grupos) for (const it of g.itens) if (it._id === id) return it;
+      return null;
+    }
+
+    function pintarItem(id) {
+      const el = lista.querySelector(`.item[data-id="${id}"]`);
+      if (!el) return;
+      const q = qtd[id] || 0;
+      el.querySelector(".qtd").textContent = q;
+      el.classList.toggle("ativo", q > 0);
+    }
+    function pintarTudo() {
+      grupos.forEach((g) => g.itens.forEach((it) => pintarItem(it._id)));
+      atualizarTotal();
+    }
+
+    function muda(id, delta) {
+      const atual = qtd[id] || 0;
+      const novo = Math.max(0, atual + delta);
+      if (novo === 0) delete qtd[id]; else qtd[id] = novo;
+      pintarItem(id);
+      atualizarTotal();
+    }
+
+    // ---- Total ----
+    const elTotalVal = document.getElementById("total-val");
+    const elTotalItens = document.getElementById("total-itens");
+    function calc() {
+      let total = 0, n = 0;
+      for (const id in qtd) {
+        const it = itemPorId(id);
+        if (!it) continue;
+        total += precoNum(it.preco) * qtd[id];
+        n += qtd[id];
+      }
+      return { total, n };
+    }
+    function atualizarTotal() {
+      const { total, n } = calc();
+      elTotalVal.textContent = precoFmt(total);
+      elTotalItens.textContent = n === 0 ? "Nenhum item" : n + (n === 1 ? " item" : " itens");
+    }
+
+    // ---- Eventos (delegação) ----
+    lista.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-act]");
+      if (!btn) return;
+      const item = btn.closest(".item");
+      muda(item.dataset.id, btn.dataset.act === "+" ? 1 : -1);
+    });
+
+    // ---- Busca ----
+    document.getElementById("busca").addEventListener("input", (e) => {
+      const termo = e.target.value.trim().toLowerCase();
+      lista.querySelectorAll(".item").forEach((el) => {
+        el.style.display = !termo || el.dataset.nome.includes(termo) ? "" : "none";
+      });
+      lista.querySelectorAll(".cat-bloco").forEach((bl) => {
+        const algum = [...bl.querySelectorAll(".item")].some((el) => el.style.display !== "none");
+        bl.style.display = algum ? "" : "none";
+      });
+    });
+
+    // ---- Limpar ----
+    document.getElementById("btn-limpar").addEventListener("click", () => {
+      if (calc().n > 0 && !confirm("Limpar toda a comanda?")) return;
+      for (const k in qtd) delete qtd[k];
+      pintarTudo();
+    });
+
+    // ---- Impressão ----
+    function montarTicket() {
+      const mesa = (document.getElementById("mesa").value || "").trim();
+      const garcom = (document.getElementById("garcom").value || "").trim();
+      const obs = (document.getElementById("obs").value || "").trim();
+      const { total, n } = calc();
+
+      // lista de pedidos na ordem do cardápio
+      const pedidos = [];
+      grupos.forEach((g) => g.itens.forEach((it) => {
+        const q = qtd[it._id];
+        if (q) pedidos.push({ q, nome: it.nome, preco: precoNum(it.preco) });
+      }));
+
+      const dataLinha = new Date().toLocaleString("pt-BR", {
+        day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit"
+      });
+
+      const linhaPreco = (p) => pedidos.map((it) =>
+        `<div class="tk-linha"><span class="tk-q">${it.q}x</span><span class="tk-n">${it.nome}</span>${p ? `<span class="tk-p">${precoFmt(it.preco * it.q)}</span>` : ""}</div>`
+      ).join("");
+
+      const head = `
+        <div class="tk-head">
+          <div class="tk-nome">CHÁCARA LAGO JB</div>
+          <div class="tk-sub">Vila Amazônia, Parintins</div>
+        </div>
+        <div class="tk-meta">
+          ${mesa ? `<div><b>Mesa:</b> ${mesa}</div>` : ""}
+          ${garcom ? `<div><b>Garçom:</b> ${garcom}</div>` : ""}
+          <div><b>Data:</b> ${dataLinha}</div>
+        </div>`;
+
+      const obsBloco = obs ? `<div class="tk-obs"><b>Obs.:</b> ${obs}</div>` : "";
+
+      // Via Cozinha (sem preços) + Via Cliente (com preços e total)
+      const ticket = document.getElementById("ticket");
+      ticket.innerHTML = `
+        ${head}
+        <div class="tk-via">VIA COZINHA</div>
+        ${linhaPreco(false)}
+        ${obsBloco}
+        <div class="tk-pe">Pedido com ${n} ${n === 1 ? "item" : "itens"}</div>
+
+        <div class="tk-via">VIA CLIENTE</div>
+        ${linhaPreco(true)}
+        <div class="tk-sep"></div>
+        <div class="tk-total"><span>TOTAL</span><span>${precoFmt(total)}</span></div>
+        ${obsBloco}
+        <div class="tk-pe">Obrigado pela preferência! 🌅</div>
+      `;
+    }
+
+    document.getElementById("btn-imprimir").addEventListener("click", () => {
+      if (calc().n === 0) { alert("Adicione pelo menos um item antes de imprimir."); return; }
+      montarTicket();
+      window.print();
+    });
+
+    render();
+  })();
+  </script>
+</body>
+</html>
