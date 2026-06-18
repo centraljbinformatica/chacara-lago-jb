@@ -233,14 +233,16 @@
     function addGrupo(categoria, icone, itens) {
       grupos.push({ categoria, icone, itens });
     }
+    function precoPromo(txt) { const m = String(txt).match(/(\d+)(?!.*\d)/); return m ? m[1] + ",00" : "0,00"; }
     (CARDAPIO.comida || []).concat(CARDAPIO.bebida || []).forEach((g) => {
-      if (g.subgrupos) {
-        // junta todos os subgrupos numa categoria só
-        const todos = g.subgrupos.reduce((acc, sg) => acc.concat(sg.itens), []);
-        addGrupo(g.categoria, g.icone, todos);
-      } else {
-        addGrupo(g.categoria, g.icone, g.itens);
+      let itens = g.subgrupos
+        ? g.subgrupos.reduce((acc, sg) => acc.concat(sg.itens), [])
+        : g.itens.slice();
+      // se a categoria tem promoção (ex.: Drinks), entra a opção "Drink em dobro"
+      if (g.promo) {
+        itens = [{ nome: "Drink em dobro", desc: g.promo, preco: precoPromo(g.promo) }].concat(itens);
       }
+      addGrupo(g.categoria, g.icone, itens);
     });
 
     // estado: chave única por item -> quantidade
