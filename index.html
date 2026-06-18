@@ -84,6 +84,7 @@
 
   <!-- ======================= SOBRE ======================= -->
   <section id="sobre" class="section">
+    <div class="orbs" aria-hidden="true"><span class="orb orb-1"></span><span class="orb orb-2"></span><span class="orb orb-3"></span></div>
     <div class="section-head">
       <p class="eyebrow">Bem-vindo</p>
       <h2>Sua praia particular à beira do Amazonas</h2>
@@ -141,6 +142,20 @@
         <img class="gallery-item" src="img/arco-iris.jpg" alt="Arco-íris sobre o lago" loading="lazy" />
       </div>
       <button class="gal-arrow gal-next" aria-label="Mais fotos">&#10095;</button>
+    </div>
+  </section>
+
+  <!-- ============ TRANSIÇÃO DE FOTOS (efeito ao rolar) ============ -->
+  <section class="morph" aria-label="Do lago ao arco-íris">
+    <div class="morph-sticky">
+      <div class="morph-img morph-img-b" style="background-image:url('img/arco-iris.jpg')"></div>
+      <div class="morph-img morph-img-a" style="background-image:url('img/lago-ceu.jpg')"></div>
+      <div class="morph-seam"></div>
+      <div class="morph-caption">
+        <span class="morph-cap morph-cap-a">Lago e céu aberto</span>
+        <span class="morph-cap morph-cap-b">Arco-íris no fim da tarde</span>
+      </div>
+      <span class="morph-hint">role para ver ✨</span>
     </div>
   </section>
 

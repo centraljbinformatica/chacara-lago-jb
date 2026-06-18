@@ -146,6 +146,41 @@ if (bands.length) {
   parallax();
 }
 
+/* ---- MORPH: uma foto vira a outra conforme você rola ---- */
+const morph = document.querySelector(".morph");
+if (morph) {
+  const imgA = morph.querySelector(".morph-img-a");
+  const seam = morph.querySelector(".morph-seam");
+  let mTick = false;
+  function morphUpdate() {
+    const rect = morph.getBoundingClientRect();
+    const total = morph.offsetHeight - window.innerHeight;
+    let p = total > 0 ? -rect.top / total : 0;
+    p = Math.max(0, Math.min(1, p));
+    if (imgA) imgA.style.clipPath = `inset(0 0 0 ${(p * 100).toFixed(2)}%)`;
+    if (seam) {
+      seam.style.left = `${(p * 100).toFixed(2)}%`;
+      seam.style.opacity = p > 0.01 && p < 0.99 ? "1" : "0";
+    }
+    morph.style.setProperty("--mp", p.toFixed(3));
+    mTick = false;
+  }
+  function morphScroll() { if (!mTick) { mTick = true; requestAnimationFrame(morphUpdate); } }
+  window.addEventListener("scroll", morphScroll, { passive: true });
+  window.addEventListener("resize", morphUpdate);
+  morphUpdate();
+}
+
+/* ---- ORBS: leve movimento ao passar o mouse (só no PC) ---- */
+const orbsLayer = document.querySelector(".orbs");
+if (orbsLayer && window.matchMedia("(pointer:fine)").matches) {
+  window.addEventListener("mousemove", (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 26;
+    const y = (e.clientY / window.innerHeight - 0.5) * 26;
+    orbsLayer.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
+  }, { passive: true });
+}
+
 /* ---- GALERIA: clicar pra ampliar (lightbox) ---- */
 const galeria = Array.from(document.querySelectorAll(".gallery-item"));
 const lb = document.getElementById("lightbox");
