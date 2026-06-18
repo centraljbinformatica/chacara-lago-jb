@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comanda para imprimir — Chácara Lago JB</title>
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{ --azul:#1d3f70; --laranja:#d9641a; --linha:#bcc4cf; --txt:#1f2a37; }
+    *{box-sizing:border-box;}
+    html,body{margin:0; font-family:'Inter',system-ui,sans-serif; color:var(--txt); background:#e9edf2;}
+
+    /* Barra de ações (some na impressão) */
+    .acoes{
+      position:sticky; top:0; z-index:5; background:#fff; border-bottom:1px solid #d7dde5;
+      padding:12px 16px; display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+      box-shadow:0 2px 8px rgba(0,0,0,.05);
+    }
+    .acoes p{margin:0; font-size:.84rem; color:#6b7480; flex:1; min-width:200px;}
+    .acoes b{color:var(--azul);}
+    .btn{
+      font-family:inherit; font-weight:700; font-size:.92rem; cursor:pointer;
+      border:none; border-radius:10px; padding:11px 18px;
+      background:linear-gradient(135deg,#f47a1d,#d9641a); color:#fff;
+    }
+    .btn.sec{background:#eef1f5; color:#41506a;}
+
+    /* Folha A4 */
+    .folha{
+      width:210mm; min-height:297mm; margin:18px auto; background:#fff; padding:12mm 11mm;
+      box-shadow:0 6px 24px rgba(0,0,0,.12);
+    }
+
+    .cab{display:flex; align-items:center; gap:12px; border-bottom:3px solid var(--azul); padding-bottom:8px;}
+    .cab img{height:42px;}
+    .cab .tit{flex:1;}
+    .cab h1{font-family:'Cinzel',serif; color:var(--azul); margin:0; font-size:1.4rem; line-height:1;}
+    .cab .sub{font-size:.78rem; color:#6b7480; margin-top:3px;}
+    .cab .comanda-tag{
+      font-weight:800; color:var(--laranja); border:2px solid var(--laranja);
+      border-radius:8px; padding:6px 12px; font-size:.95rem; letter-spacing:1px;
+    }
+
+    /* Campos topo */
+    .topo-campos{display:flex; gap:14px; flex-wrap:wrap; margin:12px 0 4px; font-size:.88rem;}
+    .topo-campos .c{flex:1; min-width:120px; display:flex; align-items:flex-end; gap:6px;}
+    .topo-campos .c b{white-space:nowrap;}
+    .linha-preencher{flex:1; border-bottom:1.4px solid var(--linha); height:1.1em;}
+
+    /* Grade de categorias em 2 colunas */
+    .grade{column-count:2; column-gap:14px; margin-top:10px;}
+    .cat{break-inside:avoid; margin-bottom:10px;}
+    .cat h2{
+      font-family:'Cinzel',serif; color:#fff; background:var(--azul);
+      font-size:.82rem; margin:0; padding:4px 8px; border-radius:6px 6px 0 0; letter-spacing:.3px;
+    }
+    table{width:100%; border-collapse:collapse;}
+    td{padding:3px 6px; font-size:.8rem; border-bottom:1px solid #e7ebf0;}
+    .qcol{width:30px; text-align:center;}
+    .qbox{display:inline-block; width:22px; height:18px; border:1.4px solid #8b95a3; border-radius:4px;}
+    .nome{line-height:1.15;}
+    .nome small{display:block; color:#8b95a3; font-size:.68rem;}
+    .pcol{width:54px; text-align:right; color:var(--laranja); font-weight:700; white-space:nowrap;}
+
+    /* Rodapé: total + pagamento + obs */
+    .rodape{margin-top:14px; border-top:2px dashed #9aa3af; padding-top:10px; display:flex; gap:18px; flex-wrap:wrap;}
+    .rodape .bloco{flex:1; min-width:180px;}
+    .rodape .rot{font-size:.74rem; font-weight:700; color:#6b7480; text-transform:uppercase; letter-spacing:.4px; margin-bottom:4px;}
+    .pag-opcoes{display:flex; gap:16px; font-size:.9rem; align-items:center;}
+    .check{display:inline-block; width:15px; height:15px; border:1.6px solid #41506a; border-radius:4px; vertical-align:-2px; margin-right:5px;}
+    .total-linha{display:flex; align-items:flex-end; gap:8px; font-size:1.05rem;}
+    .total-linha b{font-size:1.15rem; color:var(--azul);}
+    .obs-linha{border-bottom:1.4px solid var(--linha); height:1.3em; margin-top:6px;}
+    .pe{text-align:center; font-size:.72rem; color:#8b95a3; margin-top:12px;}
+
+    @media print{
+      @page{ size:A4; margin:8mm; }
+      html,body{background:#fff;}
+      .acoes{display:none !important;}
+      .folha{width:auto; min-height:auto; margin:0; padding:0; box-shadow:none;}
+      *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="acoes">
+    <p>Comanda em branco para <b>preencher à mão</b>. Clique em imprimir e, na janela, escolha a impressora ou <b>“Salvar como PDF”</b>.</p>
+    <button class="btn sec" onclick="location.href='comanda.html'">↤ Comanda digital</button>
+    <button class="btn" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
+  </div>
+
+  <div class="folha">
+    <div class="cab">
+      <img src="img/logo.png" alt="" onerror="this.style.display='none'" />
+      <div class="tit">
+        <h1>Chácara Lago JB</h1>
+        <div class="sub">Vila Amazônia, Parintins</div>
+      </div>
+      <div class="comanda-tag">COMANDA Nº _______</div>
+    </div>
+
+    <div class="topo-campos">
+      <div class="c"><b>Mesa/Cliente:</b><span class="linha-preencher"></span></div>
+      <div class="c"><b>Garçom:</b><span class="linha-preencher"></span></div>
+      <div class="c"><b>Data:</b><span class="linha-preencher"></span></div>
+    </div>
+
+    <div class="grade" id="grade"></div>
+
+    <div class="rodape">
+      <div class="bloco">
+        <div class="rot">Forma de pagamento</div>
+        <div class="pag-opcoes">
+          <span><span class="check"></span>Dinheiro</span>
+          <span><span class="check"></span>PIX</span>
+          <span><span class="check"></span>Cartão</span>
+        </div>
+        <div class="rot" style="margin-top:10px;">Observações</div>
+        <div class="obs-linha"></div>
+        <div class="obs-linha"></div>
+      </div>
+      <div class="bloco" style="max-width:230px;">
+        <div class="rot">Total a pagar</div>
+        <div class="total-linha"><b>R$</b><span class="linha-preencher"></span></div>
+        <div class="rot" style="margin-top:14px;">Recebido / Troco</div>
+        <div class="total-linha"><span class="linha-preencher"></span></div>
+      </div>
+    </div>
+
+    <div class="pe">Quantidade no quadradinho ⬜ · Preço por unidade ao lado · Crianças até 5 anos não pagam o ingresso</div>
+  </div>
+
+  <script src="menu.js"></script>
+  <script>
+  (function () {
+    function precoNum(p){ return parseFloat(String(p).replace(/\./g,"").replace(",",".")) || 0; }
+    function precoFmt(n){ return n.toFixed(2).replace(".",","); }
+
+    // monta blocos: trata subgrupos como categoria única
+    const blocos = [];
+    (CARDAPIO.comida||[]).concat(CARDAPIO.bebida||[]).forEach((g) => {
+      const itens = g.subgrupos
+        ? g.subgrupos.reduce((a,sg)=>a.concat(sg.itens),[])
+        : g.itens;
+      blocos.push({ categoria:g.categoria, icone:g.icone||"", itens });
+    });
+
+    document.getElementById("grade").innerHTML = blocos.map((b) => `
+      <div class="cat">
+        <h2>${b.icone} ${b.categoria}</h2>
+        <table><tbody>
+          ${b.itens.map((it) => `
+            <tr>
+              <td class="qcol"><span class="qbox"></span></td>
+              <td class="nome">${it.nome}${it.desc ? `<small>${it.desc}</small>` : ""}</td>
+              <td class="pcol">${precoFmt(precoNum(it.preco))}</td>
+            </tr>`).join("")}
+        </tbody></table>
+      </div>`).join("");
+  })();
+  </script>
+</body>
+</html>

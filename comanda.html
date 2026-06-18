@@ -49,6 +49,14 @@
       border:1px solid var(--borda); border-radius:9px; background:var(--fundo); color:var(--txt);
     }
     .campo input:focus{outline:none; border-color:var(--azul); background:#fff;}
+    .pag{display:flex; gap:8px; flex-wrap:wrap;}
+    .pag-op{
+      font-family:inherit; font-size:.88rem; font-weight:600; cursor:pointer;
+      padding:9px 14px; border:1px solid var(--borda); border-radius:30px;
+      background:var(--fundo); color:var(--suave); transition:all .15s;
+    }
+    .pag-op:active{transform:scale(.96);}
+    .pag-op.sel{background:var(--azul); color:#fff; border-color:var(--azul);}
 
     /* ---------- Busca / filtro ---------- */
     .barra{
@@ -145,6 +153,7 @@
       .tk-linha .tk-p{white-space:nowrap;}
       .tk-sep{border-top:1px dashed #000; margin:6px 0;}
       .tk-total{display:flex; justify-content:space-between; font-weight:800; font-size:15px; margin-top:4px;}
+      .tk-pag{font-size:12px; font-weight:600; margin-top:4px; text-align:center;}
       .tk-obs{font-size:11px; margin-top:6px; border-top:1px dashed #000; padding-top:4px;}
       .tk-pe{text-align:center; font-size:10px; margin-top:8px; border-top:2px dashed #000; padding-top:6px;}
     }
@@ -172,6 +181,14 @@
       <div class="campo full">
         <label for="obs">Observações (ponto da carne, sem cebola, etc.)</label>
         <input id="obs" type="text" placeholder="Opcional" />
+      </div>
+      <div class="campo full">
+        <label>Forma de pagamento</label>
+        <div class="pag" id="pag">
+          <button type="button" class="pag-op" data-pag="Dinheiro">💵 Dinheiro</button>
+          <button type="button" class="pag-op" data-pag="PIX">📲 PIX</button>
+          <button type="button" class="pag-op" data-pag="Cartão">💳 Cartão</button>
+        </div>
       </div>
     </section>
 
@@ -300,6 +317,17 @@
       elTotalItens.textContent = n === 0 ? "Nenhum item" : n + (n === 1 ? " item" : " itens");
     }
 
+    // ---- Forma de pagamento ----
+    let pagSel = "";
+    const pagBox = document.getElementById("pag");
+    pagBox.addEventListener("click", (e) => {
+      const op = e.target.closest(".pag-op");
+      if (!op) return;
+      const val = op.dataset.pag;
+      pagSel = pagSel === val ? "" : val; // toca de novo pra desmarcar
+      pagBox.querySelectorAll(".pag-op").forEach((b) => b.classList.toggle("sel", b.dataset.pag === pagSel));
+    });
+
     // ---- Eventos (delegação) ----
     lista.addEventListener("click", (e) => {
       const btn = e.target.closest("button[data-act]");
@@ -375,6 +403,7 @@
         ${linhaPreco(true)}
         <div class="tk-sep"></div>
         <div class="tk-total"><span>TOTAL</span><span>${precoFmt(total)}</span></div>
+        ${pagSel ? `<div class="tk-pag"><b>Pagamento:</b> ${pagSel}</div>` : ""}
         ${obsBloco}
         <div class="tk-pe">Obrigado pela preferência! 🌅</div>
       `;
