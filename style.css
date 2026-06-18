@@ -267,7 +267,7 @@ code { background: #eef2f6; padding: 1px 6px; border-radius: 6px; font-size: .9e
 .menu-cat-nota { font-size: 13px; color: var(--cinza); margin: -6px 0 12px; font-style: italic; }
 .menu-subcat-title { font-family: "Inter", sans-serif; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .8px; color: var(--azul); margin: 20px 0 6px; }
 .menu-subcat-title:first-of-type { margin-top: 4px; }
-.menu-mini-sep { width: 70px; height: 1px; margin: 12px auto; background: linear-gradient(90deg, transparent, var(--borda), transparent); }
+.menu-mini-sep { width: 80px; height: 3px; border-radius: 3px; margin: 14px auto; background: linear-gradient(90deg, transparent, var(--laranja), transparent); }
 .menu-promo { display: inline-flex; align-items: center; gap: 9px; margin: 2px 0 18px; padding: 9px 14px 9px 9px; background: linear-gradient(135deg, #ff8f33, var(--laranja-esc)); color: #fff; font-weight: 800; font-size: 15px; border-radius: 13px; transform: rotate(-1.8deg); box-shadow: 0 10px 22px rgba(217,100,26,.34); animation: promoPulse 2.4s ease-in-out infinite; }
 .menu-promo-tag { background: #fff; color: var(--laranja-esc); font-size: 11px; font-weight: 900; letter-spacing: .4px; padding: 3px 8px; border-radius: 7px; white-space: nowrap; }
 .menu-promo-txt { white-space: nowrap; }

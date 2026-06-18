@@ -192,6 +192,7 @@ if (nums.length && !semMovimento && "IntersectionObserver" in window) {
       const el = e.target;
       numObs.unobserve(el);
       const target = parseInt(el.dataset.target, 10) || 0;
+      const prefix = el.dataset.prefix || "";
       const suffix = el.dataset.suffix || "";
       const dur = 1400;
       let start = null;
@@ -199,7 +200,7 @@ if (nums.length && !semMovimento && "IntersectionObserver" in window) {
         if (!start) start = ts;
         const prog = Math.min(1, (ts - start) / dur);
         const eased = 0.5 - Math.cos(prog * Math.PI) / 2; // easeInOut
-        el.textContent = Math.round(target * eased) + suffix;
+        el.textContent = prefix + Math.round(target * eased) + suffix;
         if (prog < 1) requestAnimationFrame(step);
       }
       requestAnimationFrame(step);
