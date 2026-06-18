@@ -40,6 +40,15 @@ if (heroVideo) {
 
 /* ---- ANIMAÇÃO AO ROLAR: elementos surgem suaves quando entram na tela ---- */
 document.documentElement.classList.add("js");
+
+/* ---- TÍTULOS: revelar palavra por palavra (quebra o h2 em palavras) ---- */
+document.querySelectorAll(".section-head h2").forEach((h2) => {
+  const palavras = h2.textContent.trim().split(/\s+/);
+  h2.innerHTML = palavras
+    .map((w, i) => `<span class="rw-word"><span style="transition-delay:${(i * 0.06).toFixed(2)}s">${w}</span></span>`)
+    .join(" ");
+});
+
 const alvosReveal = document.querySelectorAll(
   ".section-head, .feature, .card, .gallery-item, .partner-box, .attractions-box, .form, .photo-band .pb-text, .cta-row"
 );
@@ -93,7 +102,7 @@ function montarMenu(lista) {
       return `
       <div class="menu-cat">
         <h2 class="menu-cat-title">${grupo.categoria}</h2>
-        ${grupo.promo ? `<div class="menu-promo"><span class="menu-promo-tag">🔥 PROMO</span><span class="menu-promo-txt">${grupo.promo}</span></div>` : ""}
+        ${grupo.promo ? `<div class="menu-promo"><span class="menu-promo-tag">PROMO</span><span class="menu-promo-txt">${grupo.promo}</span></div>` : ""}
         ${grupo.nota ? `<p class="menu-cat-nota">${grupo.nota}</p>` : ""}
         ${corpo}
       </div>`;
@@ -179,6 +188,50 @@ if (orbsLayer && window.matchMedia("(pointer:fine)").matches) {
     const y = (e.clientY / window.innerHeight - 0.5) * 26;
     orbsLayer.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
   }, { passive: true });
+}
+
+/* ---- NÚMEROS: contam de 0 até o valor quando aparecem na tela ---- */
+const nums = document.querySelectorAll(".stat-num");
+if (nums.length && "IntersectionObserver" in window) {
+  const numObs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      numObs.unobserve(el);
+      const target = parseInt(el.dataset.target, 10) || 0;
+      const suffix = el.dataset.suffix || "";
+      const dur = 1400;
+      let start = null;
+      function step(ts) {
+        if (!start) start = ts;
+        const prog = Math.min(1, (ts - start) / dur);
+        const eased = 0.5 - Math.cos(prog * Math.PI) / 2; // easeInOut
+        el.textContent = Math.round(target * eased) + suffix;
+        if (prog < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }, { threshold: 0.4 });
+  nums.forEach((n) => numObs.observe(n));
+} else if (nums.length) {
+  nums.forEach((n) => { n.textContent = (n.dataset.target || "") + (n.dataset.suffix || ""); });
+}
+
+/* ---- TILT 3D nas fotos da galeria (só no PC) ---- */
+if (window.matchMedia("(pointer:fine)").matches) {
+  document.querySelectorAll(".gallery-item").forEach((img) => {
+    img.addEventListener("mouseenter", () => { img.style.transition = "transform .1s ease-out"; });
+    img.addEventListener("mousemove", (e) => {
+      const r = img.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      img.style.transform = `perspective(700px) rotateY(${(px * 10).toFixed(2)}deg) rotateX(${(-py * 10).toFixed(2)}deg) scale(1.05)`;
+    });
+    img.addEventListener("mouseleave", () => {
+      img.style.transition = "transform .5s ease";
+      img.style.transform = "";
+    });
+  });
 }
 
 /* ---- GALERIA: clicar pra ampliar (lightbox) ---- */
