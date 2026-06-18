@@ -70,7 +70,9 @@
     .linha-preencher{flex:1; border-bottom:1.1px solid var(--linha); height:1em;}
 
     /* Itens em colunas (quantas depende do modo) */
-    .grade{margin-top:4px; flex:1;}
+    /* min-height:0 deixa a lista encolher dentro do flex e clipar aqui,
+       em vez de empurrar o rodapé (pagamento) pra fora e cruzar o corte */
+    .grade{margin-top:4px; flex:1; min-height:0; overflow:hidden;}
     .per-2 .grade{column-count:2; column-gap:10px;}
     .per-3 .grade{column-count:3; column-gap:9px;}
     .per-4 .grade{column-count:4; column-gap:8px;}
