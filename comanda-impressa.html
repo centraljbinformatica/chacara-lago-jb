@@ -29,59 +29,64 @@
     }
     .btn.sec{background:#eef1f5; color:#41506a;}
 
-    /* Folha A4 */
+    /* Folha A4 com 2 comandas (cada uma = meia folha) */
     .folha{
-      width:210mm; min-height:297mm; margin:18px auto; background:#fff; padding:12mm 11mm;
+      width:210mm; margin:18px auto; background:#fff;
       box-shadow:0 6px 24px rgba(0,0,0,.12);
     }
-
-    .cab{display:flex; align-items:center; gap:12px; border-bottom:3px solid var(--azul); padding-bottom:8px;}
-    .cab img{height:42px;}
-    .cab .tit{flex:1;}
-    .cab h1{font-family:'Cinzel',serif; color:var(--azul); margin:0; font-size:1.4rem; line-height:1;}
-    .cab .sub{font-size:.78rem; color:#6b7480; margin-top:3px;}
-    .cab .comanda-tag{
-      font-weight:800; color:var(--laranja); border:2px solid var(--laranja);
-      border-radius:8px; padding:6px 12px; font-size:.95rem; letter-spacing:1px;
+    .corte{
+      text-align:center; font-size:.66rem; color:#9aa3af; letter-spacing:1px;
+      border-top:1.4px dashed #9aa3af; margin:0 8mm;
     }
 
-    /* Campos topo */
-    .topo-campos{display:flex; gap:14px; flex-wrap:wrap; margin:12px 0 4px; font-size:.88rem;}
-    .topo-campos .c{flex:1; min-width:120px; display:flex; align-items:flex-end; gap:6px;}
-    .topo-campos .c b{white-space:nowrap;}
-    .linha-preencher{flex:1; border-bottom:1.4px solid var(--linha); height:1.1em;}
+    /* Uma comanda = ~148mm de altura (metade do A4) */
+    .comanda{ padding:7mm 8mm; height:148mm; display:flex; flex-direction:column; }
 
-    /* Grade de categorias em 2 colunas */
-    .grade{column-count:2; column-gap:14px; margin-top:10px;}
-    .cat{break-inside:avoid; margin-bottom:10px;}
+    .cab{display:flex; align-items:center; gap:9px; border-bottom:2.5px solid var(--azul); padding-bottom:5px;}
+    .cab img{height:30px;}
+    .cab .tit{flex:1;}
+    .cab h1{font-family:'Cinzel',serif; color:var(--azul); margin:0; font-size:1.05rem; line-height:1;}
+    .cab .sub{font-size:.66rem; color:#6b7480; margin-top:2px;}
+    .cab .comanda-tag{
+      font-weight:800; color:var(--laranja); border:1.6px solid var(--laranja);
+      border-radius:6px; padding:3px 8px; font-size:.7rem; letter-spacing:.5px; white-space:nowrap;
+    }
+
+    .topo-campos{display:flex; gap:12px; flex-wrap:wrap; margin:6px 0 3px; font-size:.72rem;}
+    .topo-campos .c{flex:1; min-width:90px; display:flex; align-items:flex-end; gap:5px;}
+    .topo-campos .c b{white-space:nowrap;}
+    .linha-preencher{flex:1; border-bottom:1.2px solid var(--linha); height:1em;}
+
+    /* itens em 3 colunas, bem compacto */
+    .grade{column-count:3; column-gap:9px; margin-top:5px; flex:1;}
+    .cat{break-inside:avoid; margin-bottom:5px;}
     .cat h2{
       font-family:'Cinzel',serif; color:#fff; background:var(--azul);
-      font-size:.82rem; margin:0; padding:4px 8px; border-radius:6px 6px 0 0; letter-spacing:.3px;
+      font-size:.66rem; margin:0; padding:2px 6px; border-radius:4px 4px 0 0; letter-spacing:.2px;
     }
     table{width:100%; border-collapse:collapse;}
-    td{padding:3px 6px; font-size:.8rem; border-bottom:1px solid #e7ebf0;}
-    .qcol{width:30px; text-align:center;}
-    .qbox{display:inline-block; width:22px; height:18px; border:1.4px solid #8b95a3; border-radius:4px;}
-    .nome{line-height:1.15;}
-    .nome small{display:block; color:#8b95a3; font-size:.68rem;}
-    .pcol{width:54px; text-align:right; color:var(--laranja); font-weight:700; white-space:nowrap;}
+    td{padding:1.5px 4px; font-size:.66rem; border-bottom:.6px solid #e7ebf0; line-height:1.1;}
+    .qcol{width:20px; text-align:center;}
+    .qbox{display:inline-block; width:16px; height:13px; border:1.2px solid #8b95a3; border-radius:3px;}
+    .nome small{color:#8b95a3; font-size:.58rem;}
+    .pcol{width:34px; text-align:right; color:var(--laranja); font-weight:700; white-space:nowrap;}
 
-    /* Rodapé: total + pagamento + obs */
-    .rodape{margin-top:14px; border-top:2px dashed #9aa3af; padding-top:10px; display:flex; gap:18px; flex-wrap:wrap;}
-    .rodape .bloco{flex:1; min-width:180px;}
-    .rodape .rot{font-size:.74rem; font-weight:700; color:#6b7480; text-transform:uppercase; letter-spacing:.4px; margin-bottom:4px;}
-    .pag-opcoes{display:flex; gap:16px; font-size:.9rem; align-items:center;}
-    .check{display:inline-block; width:15px; height:15px; border:1.6px solid #41506a; border-radius:4px; vertical-align:-2px; margin-right:5px;}
-    .total-linha{display:flex; align-items:flex-end; gap:8px; font-size:1.05rem;}
-    .total-linha b{font-size:1.15rem; color:var(--azul);}
-    .obs-linha{border-bottom:1.4px solid var(--linha); height:1.3em; margin-top:6px;}
-    .pe{text-align:center; font-size:.72rem; color:#8b95a3; margin-top:12px;}
+    /* rodapé */
+    .rodape{margin-top:5px; border-top:1.5px dashed #9aa3af; padding-top:5px; display:flex; gap:14px; align-items:flex-end;}
+    .rodape .bloco{flex:1;}
+    .rot{font-size:.62rem; font-weight:700; color:#6b7480; text-transform:uppercase; letter-spacing:.3px; margin-bottom:3px;}
+    .pag-opcoes{display:flex; gap:10px; font-size:.7rem; align-items:center; flex-wrap:wrap;}
+    .check{display:inline-block; width:12px; height:12px; border:1.4px solid #41506a; border-radius:3px; vertical-align:-2px; margin-right:4px;}
+    .obs-linha{border-bottom:1.2px solid var(--linha); height:1.05em; margin-top:4px;}
+    .total-cx{max-width:150px;}
+    .total-linha{display:flex; align-items:flex-end; gap:6px; font-size:.9rem;}
+    .total-linha b{font-size:1rem; color:var(--azul);}
 
     @media print{
-      @page{ size:A4; margin:8mm; }
+      @page{ size:A4; margin:0; }
       html,body{background:#fff;}
       .acoes{display:none !important;}
-      .folha{width:auto; min-height:auto; margin:0; padding:0; box-shadow:none;}
+      .folha{width:auto; margin:0; box-shadow:none;}
       *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
     }
   </style>
@@ -89,50 +94,15 @@
 <body>
 
   <div class="acoes">
-    <p>Comanda em branco para <b>preencher à mão</b>. Clique em imprimir e, na janela, escolha a impressora ou <b>“Salvar como PDF”</b>.</p>
+    <p>Comanda <b>2 por folha</b> para preencher à mão. Imprima, <b>corte no meio</b> e monte o bloquinho. Pode também <b>“Salvar como PDF”</b>.</p>
     <button class="btn sec" onclick="location.href='comanda.html'">↤ Comanda digital</button>
     <button class="btn" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
   </div>
 
   <div class="folha">
-    <div class="cab">
-      <img src="img/logo.png" alt="" onerror="this.style.display='none'" />
-      <div class="tit">
-        <h1>Chácara Lago JB</h1>
-        <div class="sub">Vila Amazônia, Parintins</div>
-      </div>
-      <div class="comanda-tag">COMANDA Nº _______</div>
-    </div>
-
-    <div class="topo-campos">
-      <div class="c"><b>Mesa/Cliente:</b><span class="linha-preencher"></span></div>
-      <div class="c"><b>Garçom:</b><span class="linha-preencher"></span></div>
-      <div class="c"><b>Data:</b><span class="linha-preencher"></span></div>
-    </div>
-
-    <div class="grade" id="grade"></div>
-
-    <div class="rodape">
-      <div class="bloco">
-        <div class="rot">Forma de pagamento</div>
-        <div class="pag-opcoes">
-          <span><span class="check"></span>Dinheiro</span>
-          <span><span class="check"></span>PIX</span>
-          <span><span class="check"></span>Cartão</span>
-        </div>
-        <div class="rot" style="margin-top:10px;">Observações</div>
-        <div class="obs-linha"></div>
-        <div class="obs-linha"></div>
-      </div>
-      <div class="bloco" style="max-width:230px;">
-        <div class="rot">Total a pagar</div>
-        <div class="total-linha"><b>R$</b><span class="linha-preencher"></span></div>
-        <div class="rot" style="margin-top:14px;">Recebido / Troco</div>
-        <div class="total-linha"><span class="linha-preencher"></span></div>
-      </div>
-    </div>
-
-    <div class="pe">Quantidade no quadradinho ⬜ · Preço por unidade ao lado · Crianças até 5 anos não pagam o ingresso</div>
+    <div class="comanda" id="comanda-1"></div>
+    <div class="corte">✂ &nbsp; corte aqui &nbsp; ✂</div>
+    <div class="comanda" id="comanda-2"></div>
   </div>
 
   <script src="menu.js"></script>
@@ -150,18 +120,57 @@
       blocos.push({ categoria:g.categoria, icone:g.icone||"", itens });
     });
 
-    document.getElementById("grade").innerHTML = blocos.map((b) => `
+    const grade = blocos.map((b) => `
       <div class="cat">
         <h2>${b.icone} ${b.categoria}</h2>
         <table><tbody>
           ${b.itens.map((it) => `
             <tr>
               <td class="qcol"><span class="qbox"></span></td>
-              <td class="nome">${it.nome}${it.desc ? `<small>${it.desc}</small>` : ""}</td>
+              <td class="nome">${it.nome}${it.desc ? `<small> ${it.desc}</small>` : ""}</td>
               <td class="pcol">${precoFmt(precoNum(it.preco))}</td>
             </tr>`).join("")}
         </tbody></table>
       </div>`).join("");
+
+    const comanda = `
+      <div class="cab">
+        <img src="img/logo.png" alt="" onerror="this.style.display='none'" />
+        <div class="tit">
+          <h1>Chácara Lago JB</h1>
+          <div class="sub">Vila Amazônia, Parintins</div>
+        </div>
+        <div class="comanda-tag">COMANDA Nº ______</div>
+      </div>
+
+      <div class="topo-campos">
+        <div class="c"><b>Mesa:</b><span class="linha-preencher"></span></div>
+        <div class="c"><b>Garçom:</b><span class="linha-preencher"></span></div>
+        <div class="c"><b>Data:</b><span class="linha-preencher"></span></div>
+      </div>
+
+      <div class="grade">${grade}</div>
+
+      <div class="rodape">
+        <div class="bloco">
+          <div class="rot">Pagamento</div>
+          <div class="pag-opcoes">
+            <span><span class="check"></span>Dinheiro</span>
+            <span><span class="check"></span>PIX</span>
+            <span><span class="check"></span>Débito</span>
+            <span><span class="check"></span>Crédito</span>
+          </div>
+          <div class="rot" style="margin-top:6px;">Observações</div>
+          <div class="obs-linha"></div>
+        </div>
+        <div class="bloco total-cx">
+          <div class="rot">Total a pagar</div>
+          <div class="total-linha"><b>R$</b><span class="linha-preencher"></span></div>
+        </div>
+      </div>`;
+
+    document.getElementById("comanda-1").innerHTML = comanda;
+    document.getElementById("comanda-2").innerHTML = comanda;
   })();
   </script>
 </body>
