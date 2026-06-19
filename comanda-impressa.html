@@ -49,9 +49,9 @@
        Como é MÍNIMO (e não altura fixa), a comanda cresce se precisar e
        NUNCA corta itens. break-inside:avoid evita quebrar no meio ao imprimir. */
     .comanda{ display:flex; flex-direction:column; break-inside:avoid; page-break-inside:avoid; }
-    .per-2 .comanda{ min-height:138mm; padding:6mm 8mm; }
-    .per-3 .comanda{ min-height:89mm;  padding:4mm 7mm; }
-    .per-4 .comanda{ min-height:65mm;  padding:3mm 6mm; }
+    .per-2 .comanda{ min-height:134mm; padding:6mm 8mm; }
+    .per-3 .comanda{ min-height:84mm;  padding:4mm 7mm; }
+    .per-4 .comanda{ min-height:60mm;  padding:3mm 6mm; }
 
     .cab{display:flex; align-items:center; gap:9px; border-bottom:2.2px solid var(--azul); padding-bottom:4px;}
     .cab img{height:30px;}
@@ -76,13 +76,17 @@
     .grade{margin-top:4px;}
     .per-2 .grade{column-count:2; column-gap:10px;}
     .per-3 .grade{column-count:3; column-gap:9px;}
-    .per-4 .grade{column-count:4; column-gap:8px;}
+    .per-4 .grade{column-count:3; column-gap:8px;} /* 3 colunas tb: evita coluna desbalanceada que estica a comanda */
+    /* Cada categoria fica inteira numa coluna; com 2/3 colunas equilibradas
+       a comanda fica baixa o suficiente pra caber N por folha. */
     .cat{break-inside:avoid; margin-bottom:4px;}
     .cat h2{
       font-family:'Cinzel',serif; color:#fff; background:var(--azul);
       margin:0; padding:2px 6px; border-radius:4px 4px 0 0; letter-spacing:.2px;
+      break-after:avoid; break-inside:avoid; /* cabeçalho nunca fica sozinho no fim da coluna */
     }
     table{width:100%; border-collapse:collapse;}
+    tr{break-inside:avoid;} /* um item não se parte entre colunas */
     td{padding:1.4px 3px; border-bottom:.6px solid #e7ebf0; line-height:1.1; vertical-align:middle;}
     .nome{}
     .nome small{color:#8b95a3;}
@@ -95,7 +99,7 @@
     .per-2 .qbox{width:10px; height:12px;}
     .per-3 .cat h2{font-size:.58rem;}     .per-3 td{font-size:.56rem;}   .per-3 .nome small{font-size:.5rem;}
     .per-3 .qbox{width:8px; height:10px;}
-    .per-4 .cat h2{font-size:.52rem;}     .per-4 td{font-size:.5rem;}    .per-4 .nome small{display:none;}
+    .per-4 .cat h2{font-size:.5rem;}      .per-4 td{font-size:.48rem; padding:1px 3px;}  .per-4 .nome small{display:none;}
     .per-4 .qbox{width:7px; height:8px; margin-left:1.5px;}
 
     /* Linha de promoção "Drink em dobro" */
@@ -119,7 +123,8 @@
     .total-linha b{color:var(--azul);}
     .per-2 .total-linha{font-size:.9rem;} .per-3 .total-linha,.per-4 .total-linha{font-size:.78rem;}
     .legenda{text-align:center; color:#9aa3af; margin-top:3px;}
-    .per-2 .legenda{font-size:.6rem;} .per-3 .legenda,.per-4 .legenda{font-size:.52rem;}
+    .per-2 .legenda{font-size:.6rem;} .per-3 .legenda{font-size:.52rem;}
+    .per-4 .legenda{display:none;} /* economiza espaço no modo mais compacto */
 
     @media print{
       @page{ size:A4; margin:5mm; }
