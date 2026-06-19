@@ -45,11 +45,13 @@
       border-top:1.2px dashed #9aa3af; padding-top:1.2mm; height:4mm;
     }
 
-    /* Uma comanda: a altura muda conforme 2, 3 ou 4 por folha */
-    .comanda{ padding:5mm 7mm; display:flex; flex-direction:column; overflow:hidden; }
-    .per-2 .comanda{ height:141mm; }
-    .per-3 .comanda{ height:92mm; }
-    .per-4 .comanda{ height:68mm; }
+    /* Uma comanda: min-height controla quantas cabem por folha.
+       Como é MÍNIMO (e não altura fixa), a comanda cresce se precisar e
+       NUNCA corta itens. break-inside:avoid evita quebrar no meio ao imprimir. */
+    .comanda{ display:flex; flex-direction:column; break-inside:avoid; page-break-inside:avoid; }
+    .per-2 .comanda{ min-height:138mm; padding:6mm 8mm; }
+    .per-3 .comanda{ min-height:89mm;  padding:4mm 7mm; }
+    .per-4 .comanda{ min-height:65mm;  padding:3mm 6mm; }
 
     .cab{display:flex; align-items:center; gap:9px; border-bottom:2.2px solid var(--azul); padding-bottom:4px;}
     .cab img{height:30px;}
@@ -69,10 +71,9 @@
     .topo-campos .c b{white-space:nowrap;}
     .linha-preencher{flex:1; border-bottom:1.1px solid var(--linha); height:1em;}
 
-    /* Itens em colunas (quantas depende do modo) */
-    /* min-height:0 deixa a lista encolher dentro do flex e clipar aqui,
-       em vez de empurrar o rodapé (pagamento) pra fora e cruzar o corte */
-    .grade{margin-top:4px; flex:1; min-height:0; overflow:hidden;}
+    /* Itens em colunas (quantas depende do modo).
+       Altura natural, sem overflow: mostra SEMPRE todos os itens. */
+    .grade{margin-top:4px;}
     .per-2 .grade{column-count:2; column-gap:10px;}
     .per-3 .grade{column-count:3; column-gap:9px;}
     .per-4 .grade{column-count:4; column-gap:8px;}
@@ -103,7 +104,9 @@
     .promo-row .pcol{color:#b34d12;}
 
     /* Rodapé */
-    .rodape{margin-top:4px; border-top:1.4px dashed #9aa3af; padding-top:4px; display:flex; gap:12px; align-items:flex-end;}
+    /* margin-top:auto empurra o rodapé pro fim da comanda quando sobra espaço,
+       e encosta nos itens quando o conteúdo é grande. Nunca sobrepõe. */
+    .rodape{margin-top:auto; border-top:1.4px dashed #9aa3af; padding-top:5px; display:flex; gap:12px; align-items:flex-end;}
     .rodape .bloco{flex:1;}
     .rot{font-weight:700; color:#6b7480; text-transform:uppercase; letter-spacing:.3px; margin-bottom:2px;}
     .per-2 .rot{font-size:.62rem;} .per-3 .rot,.per-4 .rot{font-size:.56rem;}
