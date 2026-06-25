@@ -48,7 +48,7 @@
     /* Uma comanda: min-height controla quantas cabem por folha.
        Como é MÍNIMO (e não altura fixa), a comanda cresce se precisar e
        NUNCA corta itens. break-inside:avoid evita quebrar no meio ao imprimir. */
-    .comanda{ display:flex; flex-direction:column; break-inside:avoid; page-break-inside:avoid; }
+    .comanda{ break-inside:avoid; page-break-inside:avoid; }
     .per-2 .comanda{ min-height:134mm; padding:6mm 8mm; }
     .per-3 .comanda{ min-height:84mm;  padding:4mm 7mm; }
     .per-4 .comanda{ min-height:60mm;  padding:3mm 6mm; }
@@ -71,15 +71,16 @@
     .topo-campos .c b{white-space:nowrap;}
     .linha-preencher{flex:1; border-bottom:1.1px solid var(--linha); height:1em;}
 
-    /* Itens em colunas (quantas depende do modo).
-       Altura natural, sem overflow: mostra SEMPRE todos os itens. */
-    .grade{margin-top:4px;}
-    .per-2 .grade{column-count:2; column-gap:10px;}
-    .per-3 .grade{column-count:3; column-gap:9px;}
-    .per-4 .grade{column-count:3; column-gap:8px;} /* 3 colunas tb: evita coluna desbalanceada que estica a comanda */
+    /* GRID em vez de multi-coluna (column-count): o multi-coluna DESMONTA na
+       impressão (empilha tudo numa coluna e cada comanda vira 1 página).
+       No grid cada categoria é uma célula fixa e imprime do mesmo jeito da tela. */
+    .grade{margin-top:4px; display:grid; gap:4px 9px; align-content:start;}
+    .per-2 .grade{grid-template-columns:repeat(2,1fr);}
+    .per-3 .grade{grid-template-columns:repeat(3,1fr);}
+    .per-4 .grade{grid-template-columns:repeat(3,1fr);}
     /* Cada categoria fica inteira numa coluna; com 2/3 colunas equilibradas
        a comanda fica baixa o suficiente pra caber N por folha. */
-    .cat{break-inside:avoid; margin-bottom:4px;}
+    .cat{break-inside:avoid;}
     .cat h2{
       font-family:'Cinzel',serif; color:#fff; background:var(--azul);
       margin:0; padding:2px 6px; border-radius:4px 4px 0 0; letter-spacing:.2px;
@@ -108,9 +109,7 @@
     .promo-row .pcol{color:#b34d12;}
 
     /* Rodapé */
-    /* margin-top:auto empurra o rodapé pro fim da comanda quando sobra espaço,
-       e encosta nos itens quando o conteúdo é grande. Nunca sobrepõe. */
-    .rodape{margin-top:auto; border-top:1.4px dashed #9aa3af; padding-top:5px; display:flex; gap:12px; align-items:flex-end;}
+    .rodape{margin-top:7px; border-top:1.4px dashed #9aa3af; padding-top:5px; display:flex; gap:12px; align-items:flex-end;}
     .rodape .bloco{flex:1;}
     .rot{font-weight:700; color:#6b7480; text-transform:uppercase; letter-spacing:.3px; margin-bottom:2px;}
     .per-2 .rot{font-size:.62rem;} .per-3 .rot,.per-4 .rot{font-size:.56rem;}
@@ -168,6 +167,8 @@
         : g.itens;
       blocos.push({ categoria:g.categoria, icone:g.icone||"", promo:g.promo, itens });
     });
+    // categorias maiores primeiro: equilibra as colunas do grid (linhas mais baixas)
+    blocos.sort((a, b) => b.itens.length - a.itens.length);
 
     function linha(nome, desc, preco, promo){
       return `<tr class="${promo ? "promo-row" : ""}">
