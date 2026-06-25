@@ -42,7 +42,7 @@
     }
     .corte{
       text-align:center; font-size:8px; color:#9aa3af; letter-spacing:1px;
-      border-top:1.2px dashed #9aa3af; padding-top:1.2mm; height:4mm;
+      border-top:1.2px dashed #9aa3af; padding-top:1mm; height:3mm;
     }
 
     /* Uma comanda: min-height controla quantas cabem por folha.
@@ -51,7 +51,7 @@
     .comanda{ break-inside:avoid; page-break-inside:avoid; }
     .per-2 .comanda{ min-height:134mm; padding:6mm 8mm; }
     .per-3 .comanda{ min-height:84mm;  padding:4mm 7mm; }
-    .per-4 .comanda{ min-height:60mm;  padding:3mm 6mm; }
+    .per-4 .comanda{ min-height:56mm;  padding:3mm 6mm; }
 
     .cab{display:flex; align-items:center; gap:9px; border-bottom:2.2px solid var(--azul); padding-bottom:4px;}
     .cab img{height:30px;}
@@ -98,9 +98,9 @@
     /* Tamanhos por modo */
     .per-2 .cat h2{font-size:.66rem;}     .per-2 td{font-size:.66rem;}   .per-2 .nome small{font-size:.58rem;}
     .per-2 .qbox{width:10px; height:12px;}
-    .per-3 .cat h2{font-size:.58rem;}     .per-3 td{font-size:.56rem;}   .per-3 .nome small{font-size:.5rem;}
-    .per-3 .qbox{width:8px; height:10px;}
-    .per-4 .cat h2{font-size:.5rem;}      .per-4 td{font-size:.48rem; padding:1px 3px;}  .per-4 .nome small{display:none;}
+    .per-3 .cat h2{font-size:.55rem;}     .per-3 td{font-size:.5rem; padding:1px 3px;}   .per-3 .nome small{font-size:.46rem;}
+    .per-3 .qbox{width:8px; height:9px;}
+    .per-4 .cat h2{font-size:.5rem;}      .per-4 td{font-size:.46rem; padding:1px 3px;}  .per-4 .nome small{display:none;}
     .per-4 .qbox{width:7px; height:8px; margin-left:1.5px;}
 
     /* Linha de promoção "Drink em dobro" */
@@ -125,6 +125,22 @@
     .per-2 .legenda{font-size:.6rem;} .per-3 .legenda{font-size:.52rem;}
     .per-4 .legenda{display:none;} /* economiza espaço no modo mais compacto */
 
+    /* Modo 3: compactação leve pra caber as 3 na MESMA folha */
+    .per-3 .cab img{height:18px;}
+    .per-3 .cab{padding-bottom:3px;}
+    .per-3 .topo-campos{margin:4px 0 1px;}
+    .per-3 .rodape{margin-top:5px; padding-top:4px;}
+
+    /* Modo 4: cabeçalho e rodapé compactos pra caber as 4 na MESMA folha */
+    .per-4 .cab img{height:16px;}
+    .per-4 .cab{padding-bottom:2px;}
+    .per-4 .cab .comanda-tag{padding:2px 6px; font-size:.58rem;}
+    .per-4 .topo-campos{margin:3px 0 1px; font-size:.62rem;}
+    .per-4 .cat h2{padding:1px 5px;}
+    .per-4 .rodape{margin-top:4px; padding-top:3px;}
+    .per-3 .obs-rot, .per-3 .obs-linha,
+    .per-4 .obs-rot, .per-4 .obs-linha{display:none;} /* sem linha de observações nos modos 3 e 4 (fica no modo 2) */
+
     @media print{
       @page{ size:A4; margin:5mm; }
       html,body{background:#fff;}
@@ -145,6 +161,13 @@
     </div>
     <button class="btn sec" onclick="location.href='comanda.html'">↤ Digital</button>
     <button class="btn" onclick="window.print()">🖨️ Imprimir / PDF</button>
+  </div>
+
+  <div class="acoes" style="border-top:none; box-shadow:none; padding-top:0;">
+    <p style="flex:1; min-width:240px;">📄 <b>PDFs prontos</b> (1 folha cada, já no tamanho certo, é só baixar e mandar imprimir):</p>
+    <a class="btn sec" href="pdf/comanda-2-por-folha.pdf" download>⬇ 2 por folha</a>
+    <a class="btn sec" href="pdf/comanda-3-por-folha.pdf" download>⬇ 3 por folha</a>
+    <a class="btn sec" href="pdf/comanda-4-por-folha.pdf" download>⬇ 4 por folha</a>
   </div>
 
   <div class="folha per-2" id="folha"></div>
@@ -211,7 +234,7 @@
             <span><span class="check"></span>Débito</span>
             <span><span class="check"></span>Crédito</span>
           </div>
-          <div class="rot" style="margin-top:5px;">Observações</div>
+          <div class="rot obs-rot" style="margin-top:5px;">Observações</div>
           <div class="obs-linha"></div>
         </div>
         <div class="bloco total-cx">
@@ -240,7 +263,9 @@
       if (b) render(parseInt(b.dataset.n, 10));
     });
 
-    render(2); // começa com 2 por folha
+    // abre no modo da URL (?n=2|3|4) ou 2 por padrão
+    const nUrl = parseInt(new URLSearchParams(location.search).get("n"), 10);
+    render([2,3,4].includes(nUrl) ? nUrl : 2);
   })();
   </script>
 </body>
