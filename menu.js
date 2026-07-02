@@ -46,9 +46,9 @@ const CARDAPIO = {
       categoria: "Cervejas",
       icone: "🍺",
       itens: [
-        { nome: "Corona",              desc: "", preco: "10,00", img: "img/cardapio/corona.jpg" },
-        { nome: "Heineken",            desc: "", preco: "10,00", img: "img/cardapio/heineken.jpg" },
-        { nome: "Budweiser",           desc: "", preco: "10,00", img: "img/cardapio/budweiser.jpg" },
+        { nome: "Corona",              desc: "", preco: "12,00", img: "img/cardapio/corona.jpg" },
+        { nome: "Heineken",            desc: "", preco: "12,00", img: "img/cardapio/heineken.jpg" },
+        { nome: "Budweiser",           desc: "", preco: "12,00", img: "img/cardapio/budweiser.jpg" },
         { nome: "Original Antárctica", desc: "", preco: "5,00",  img: "img/cardapio/antarctica.jpg" },
       ],
     },
