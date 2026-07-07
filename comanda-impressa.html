@@ -171,6 +171,14 @@
     .per-3 .obs-rot, .per-3 .obs-linha,
     .per-4 .obs-rot, .per-4 .obs-linha{display:none;}
 
+    /* Faixa do tipo (Cozinha/Bar) pra distinguir na hora as duas versões */
+    .tipo-band{text-align:center; font-weight:800; letter-spacing:1px; color:#fff; border-radius:5px; margin:4px 0 2px; padding:3px 6px;}
+    .tipo-band.comida{background:var(--laranja);}
+    .tipo-band.bebida{background:var(--azul);}
+    .lado .tipo-band{font-size:.82rem; margin:5px 0 3px;}
+    .per-3 .tipo-band{font-size:.5rem; padding:1px 5px; margin:2px 0 1px;}
+    .per-4 .tipo-band{font-size:.46rem; padding:1px 5px; margin:1px 0;}
+
     @media print{
       @page{ size:A4; margin:5mm; }
       html,body{background:#fff;}
@@ -183,7 +191,11 @@
 <body>
 
   <div class="acoes">
-    <p>Escolha o formato, imprima e <b>corte</b>. O <b>2 lado a lado</b> é o de restaurante: grande e fácil de escrever.</p>
+    <p>Escolha <b>o que</b> e <b>o formato</b>, imprima e <b>corte</b>. São duas versões: 🍽️ Comidas (cozinha) e 🥤 Bebidas (bar).</p>
+    <div class="toggle" id="toggleTipo">
+      <button data-tipo="comida">🍽️ Comidas</button>
+      <button data-tipo="bebida">🥤 Bebidas</button>
+    </div>
     <div class="toggle" id="toggle">
       <button data-modo="lado">2 lado a lado</button>
       <button data-modo="3">3 por folha</button>
@@ -193,11 +205,19 @@
     <button class="btn" onclick="window.print()">🖨️ Imprimir / PDF</button>
   </div>
 
+  <div class="acoes" style="border-top:none; box-shadow:none; padding-top:0; padding-bottom:4px;">
+    <p style="flex:1; min-width:240px;">📄 <b>PDFs prontos</b> (1 folha cada, é só baixar e imprimir):</p>
+    <span style="font-weight:700; color:#d9641a;">🍽️ Comidas:</span>
+    <a class="btn sec" href="pdf/comanda-comidas-2-por-folha.pdf" download>⬇ 2 lado a lado</a>
+    <a class="btn sec" href="pdf/comanda-comidas-3-por-folha.pdf" download>⬇ 3</a>
+    <a class="btn sec" href="pdf/comanda-comidas-4-por-folha.pdf" download>⬇ 4</a>
+  </div>
   <div class="acoes" style="border-top:none; box-shadow:none; padding-top:0;">
-    <p style="flex:1; min-width:240px;">📄 <b>PDFs prontos</b> (1 folha cada, já no tamanho certo, é só baixar e mandar imprimir):</p>
-    <a class="btn sec" href="pdf/comanda-2-por-folha.pdf" download>⬇ 2 lado a lado</a>
-    <a class="btn sec" href="pdf/comanda-3-por-folha.pdf" download>⬇ 3 por folha</a>
-    <a class="btn sec" href="pdf/comanda-4-por-folha.pdf" download>⬇ 4 por folha</a>
+    <p style="flex:1; min-width:240px;"></p>
+    <span style="font-weight:700; color:#1d3f70;">🥤 Bebidas:</span>
+    <a class="btn sec" href="pdf/comanda-bebidas-2-por-folha.pdf" download>⬇ 2 lado a lado</a>
+    <a class="btn sec" href="pdf/comanda-bebidas-3-por-folha.pdf" download>⬇ 3</a>
+    <a class="btn sec" href="pdf/comanda-bebidas-4-por-folha.pdf" download>⬇ 4</a>
   </div>
 
   <div class="folha lado" id="folha"></div>
@@ -212,14 +232,20 @@
     const NBOX = 5; // quantos quadradinhos por item
     function boxes(){ let s=""; for(let i=0;i<NBOX;i++) s+='<span class="qbox"></span>'; return s; }
 
-    // monta blocos: subgrupos viram categoria única; guarda a promo (ex.: Drinks)
-    const blocos = [];
-    (CARDAPIO.comida||[]).concat(CARDAPIO.bebida||[]).forEach((g) => {
-      const itens = g.subgrupos
-        ? g.subgrupos.reduce((a,sg)=>a.concat(sg.itens),[])
-        : g.itens;
-      blocos.push({ categoria:g.categoria, icone:g.icone||"", promo:g.promo, itens });
-    });
+    // monta blocos de um conjunto de grupos: subgrupos viram categoria única; guarda a promo (ex.: Drinks)
+    function buildBlocos(grupos){
+      const arr = [];
+      (grupos||[]).forEach((g) => {
+        const itens = g.subgrupos
+          ? g.subgrupos.reduce((a,sg)=>a.concat(sg.itens),[])
+          : g.itens;
+        arr.push({ categoria:g.categoria, icone:g.icone||"", promo:g.promo, itens });
+      });
+      return arr;
+    }
+    // duas versões separadas: comidas (cozinha) e bebidas (bar)
+    const BLOCOS = { comida: buildBlocos(CARDAPIO.comida), bebida: buildBlocos(CARDAPIO.bebida) };
+    const TIPO_ROT = { comida: "🍽️ COMIDAS · Cozinha", bebida: "🥤 BEBIDAS · Bar" };
 
     function linha(nome, desc, preco, promo){
       return `<tr class="${promo ? "promo-row" : ""}">
@@ -231,9 +257,9 @@
 
     // Na tira vertical mantemos a ordem natural do cardápio (coluna única).
     // Nos modos em grade, categorias maiores primeiro equilibram as colunas.
-    function gradeHTML(ordenar){
-      const lista = ordenar ? blocos.slice().sort((a,b)=>b.itens.length-a.itens.length) : blocos;
-      return lista.map((b) => `
+    function gradeHTML(lista, ordenar){
+      const arr = ordenar ? lista.slice().sort((a,b)=>b.itens.length-a.itens.length) : lista;
+      return arr.map((b) => `
         <div class="cat">
           <h2>${b.icone} ${b.categoria}</h2>
           <table><tbody>
@@ -243,7 +269,7 @@
         </div>`).join("");
     }
 
-    function comandaHTML(ordenar){
+    function comandaHTML(tipo, ordenar){
       return `
       <div class="cab">
         <img src="img/logo.png" alt="" onerror="this.style.display='none'" />
@@ -253,12 +279,13 @@
         </div>
         <div class="comanda-tag">COMANDA Nº ______</div>
       </div>
+      <div class="tipo-band ${tipo}">${TIPO_ROT[tipo]}</div>
       <div class="topo-campos">
         <div class="c"><b>Mesa:</b><span class="linha-preencher"></span></div>
         <div class="c"><b>Garçom:</b><span class="linha-preencher"></span></div>
         <div class="c"><b>Data:</b><span class="linha-preencher"></span></div>
       </div>
-      <div class="grade">${gradeHTML(ordenar)}</div>
+      <div class="grade">${gradeHTML(BLOCOS[tipo], ordenar)}</div>
       <div class="rodape">
         <div class="bloco">
           <div class="rot">Pagamento</div>
@@ -281,10 +308,15 @@
 
     const folha = document.getElementById("folha");
     const toggle = document.getElementById("toggle");
+    const toggleTipo = document.getElementById("toggleTipo");
 
-    function render(modo){
+    let curModo = "lado";
+    let curTipo = "comida";
+
+    function render(modo, tipo){
+      curModo = modo; curTipo = tipo;
       if(modo === "lado"){
-        const c = comandaHTML(false); // coluna única, ordem natural
+        const c = comandaHTML(tipo, false); // coluna única, ordem natural
         folha.className = "folha lado";
         folha.innerHTML =
           `<div class="comanda">${c}</div>` +
@@ -292,7 +324,7 @@
           `<div class="comanda">${c}</div>`;
       } else {
         const n = parseInt(modo, 10);
-        const c = comandaHTML(true); // grade equilibrada
+        const c = comandaHTML(tipo, true); // grade equilibrada
         let html = "";
         for(let i=0;i<n;i++){
           html += `<div class="comanda">${c}</div>`;
@@ -302,18 +334,24 @@
         folha.innerHTML = html;
       }
       toggle.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.modo == modo));
+      toggleTipo.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.tipo == tipo));
     }
 
     toggle.addEventListener("click", (e) => {
       const b = e.target.closest("button[data-modo]");
-      if (b) render(b.dataset.modo);
+      if (b) render(b.dataset.modo, curTipo);
+    });
+    toggleTipo.addEventListener("click", (e) => {
+      const b = e.target.closest("button[data-tipo]");
+      if (b) render(curModo, b.dataset.tipo);
     });
 
-    // abre no formato da URL (?modo=lado|3|4) ou "lado" por padrão
+    // abre no formato/tipo da URL (?modo=lado|3|4 & ?tipo=comida|bebida)
     const p = new URLSearchParams(location.search);
     let modo = p.get("modo");
     if(!modo){ const n = p.get("n"); modo = (n==="3"||n==="4") ? n : "lado"; }
-    render(["lado","3","4"].includes(modo) ? modo : "lado");
+    let tipo = p.get("tipo");
+    render(["lado","3","4"].includes(modo) ? modo : "lado", ["comida","bebida"].includes(tipo) ? tipo : "comida");
   })();
   </script>
 </body>
