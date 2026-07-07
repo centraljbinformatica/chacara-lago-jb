@@ -97,4 +97,6 @@ const CARDAPIO = {
       ],
     },
   ],
+  // Aviso exibido no topo da aba Bebidas do cardápio digital
+  avisoBebida: "Bebidas trazidas de fora serão cobradas por rolha.",
 };

@@ -171,6 +171,33 @@
     .per-3 .obs-rot, .per-3 .obs-linha,
     .per-4 .obs-rot, .per-4 .obs-linha{display:none;}
 
+    /* COMIDAS têm poucos itens: no 4 por folha dá pra manter a letra legível
+       (sobrescreve a compactação minúscula padrão do modo 4). */
+    .tipo-comida.per-4 .grade{grid-template-columns:repeat(2,1fr);} /* colunas mais largas: nomes não quebram, comanda encurta */
+    .tipo-comida.per-4 .cab img{height:18px;}
+    .tipo-comida.per-4 .cab h1{font-size:.8rem;}
+    .tipo-comida.per-4 .cab{padding-bottom:2px;}
+    .tipo-comida.per-4 .cab .sub{display:none;}
+    .tipo-comida.per-4 .tipo-band{font-size:.6rem; padding:1.5px 6px; margin:1.5px 0;}
+    .tipo-comida.per-4 .topo-campos{font-size:.66rem; margin:2px 0 1px;}
+    .tipo-comida.per-4 .cat h2{font-size:.7rem; padding:1.5px 7px;}
+    .tipo-comida.per-4 td{font-size:.74rem; padding:1.8px 4px; line-height:1.12;}
+    .tipo-comida.per-4 .qbox{width:12px; height:13px; margin-left:3px;}
+    .tipo-comida.per-4 .rot{font-size:.6rem;}
+    .tipo-comida.per-4 .total-linha{font-size:.82rem;}
+    /* cozinha não precisa de Pagamento: esconde esse bloco no 4 por folha e sobra espaço pra letra */
+    .tipo-comida.per-4 .rodape .bloco:first-child{display:none;}
+    .tipo-comida.per-4 .rodape{margin-top:4px; padding-top:3px;}
+
+    /* BEBIDAS no 2 lado a lado: como sobra espaço, respira mais e letra um pouco maior */
+    .tipo-bebida.lado .cat h2{font-size:.9rem; padding:3px 8px;}
+    .tipo-bebida.lado .cat{margin-bottom:5px;}
+    .tipo-bebida.lado td{font-size:.98rem; padding:4px 4px;}
+    .tipo-bebida.lado .qbox{width:16px; height:17px;}
+    .tipo-bebida.lado .topo-campos{font-size:.9rem; gap:6px 10px;}
+    .tipo-bebida.lado .pag-opcoes{font-size:.94rem;}
+    .tipo-bebida.lado .total-linha{font-size:1.2rem;}
+
     /* Faixa do tipo (Cozinha/Bar) pra distinguir na hora as duas versões */
     .tipo-band{text-align:center; font-weight:800; letter-spacing:1px; color:#fff; border-radius:5px; margin:4px 0 2px; padding:3px 6px;}
     .tipo-band.comida{background:var(--laranja);}
@@ -317,7 +344,7 @@
       curModo = modo; curTipo = tipo;
       if(modo === "lado"){
         const c = comandaHTML(tipo, false); // coluna única, ordem natural
-        folha.className = "folha lado";
+        folha.className = "folha lado tipo-" + tipo;
         folha.innerHTML =
           `<div class="comanda">${c}</div>` +
           `<div class="corte-v"><span>✂ corte aqui</span></div>` +
@@ -330,7 +357,7 @@
           html += `<div class="comanda">${c}</div>`;
           if(i < n-1) html += `<div class="corte">✂ &nbsp; corte aqui &nbsp; ✂</div>`;
         }
-        folha.className = "folha per-" + n;
+        folha.className = "folha per-" + n + " tipo-" + tipo;
         folha.innerHTML = html;
       }
       toggle.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.modo == modo));

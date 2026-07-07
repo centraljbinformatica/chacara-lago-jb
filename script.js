@@ -115,7 +115,9 @@ const painelBebida = document.getElementById("menu-bebida");
 
 if (painelComida && painelBebida && typeof CARDAPIO !== "undefined") {
   painelComida.innerHTML = montarMenu(CARDAPIO.comida);
-  painelBebida.innerHTML = montarMenu(CARDAPIO.bebida);
+  painelBebida.innerHTML =
+    (CARDAPIO.avisoBebida ? `<div class="menu-aviso">🍾 ${CARDAPIO.avisoBebida}</div>` : "") +
+    montarMenu(CARDAPIO.bebida);
 
   /* ---- Troca de abas Comida / Bebida ---- */
   document.querySelectorAll(".tab").forEach((tab) => {
