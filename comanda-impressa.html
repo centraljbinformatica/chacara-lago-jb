@@ -137,6 +137,36 @@
     .lado .total-linha{font-size:1.12rem;}
     .lado .legenda{font-size:.66rem; margin-top:5px;}
 
+    /* 4 POR FOLHA EM 2x2 (comidas): células largas (metade da folha), fonte
+       legível como no 2 lado a lado. Linhas tracejadas de corte no meio. */
+    .folha.quad{display:grid; grid-template-columns:1fr 1fr;}
+    .folha.quad .comanda{
+      padding:4mm 7mm; display:flex; flex-direction:column;
+      border-right:1.2px dashed #9aa3af; border-bottom:1.2px dashed #9aa3af;
+    }
+    .folha.quad .comanda:nth-child(2n){border-right:none;}   /* coluna da direita: sem borda à direita */
+    .folha.quad .comanda:nth-child(n+3){border-bottom:none;} /* linha de baixo: sem borda embaixo */
+    .quad .cab img{height:24px;}
+    .quad .cab h1{font-size:1rem;}
+    .quad .cab .sub{font-size:.6rem;}
+    .quad .tipo-band{font-size:.72rem; margin:2px 0 1px;}
+    .quad .topo-campos{gap:3px 12px; margin:3px 0 2px; font-size:.8rem;}
+    .quad .grade{margin-top:2px;}
+    .quad .cat{margin-bottom:1px;}
+    .quad .cat h2{font-size:.82rem; padding:1.5px 8px;}
+    .quad td{font-size:.88rem; padding:2px 4px;}
+    .quad .nome small{display:none;}
+    .quad .qbox{width:14px; height:15px; margin-left:3px;}
+    .quad .topo-campos .c{min-width:0;} /* campos numa linha só, sem esticar */
+    .quad .rodape{margin-top:auto; flex-direction:column; align-items:stretch; gap:5px; padding-top:5px;}
+    .quad .rodape .bloco{flex:none;}
+    .quad .total-cx{max-width:none;}
+    .quad .rot{font-size:.64rem;}
+    .quad .total-linha{font-size:1rem;}
+    .quad .legenda{display:none;}
+    /* cozinha não precisa de Pagamento: some com esse trecho e sobra altura (mantém Observações e Total) */
+    .quad .pag-rot,.quad .pag-opcoes{display:none;}
+
     /* Tiras verticais mais estreitas (3 ou 4 por folha): ajusta pra caber na
        largura, mantendo a letra grande. Usado nas COMIDAS (poucos itens). */
     .folha.cols-3 .comanda,.folha.cols-4 .comanda{padding:6mm 4mm;}
@@ -325,7 +355,7 @@
       <div class="grade">${gradeHTML(BLOCOS[tipo], ordenar, nbox)}</div>
       <div class="rodape">
         <div class="bloco">
-          <div class="rot">Pagamento</div>
+          <div class="rot pag-rot">Pagamento</div>
           <div class="pag-opcoes">
             <span><span class="check"></span>Dinheiro</span>
             <span><span class="check"></span>PIX</span>
@@ -365,6 +395,14 @@
       folha.innerHTML = html;
     }
 
+    // 4 por folha em 2x2 (duas em cima, duas embaixo), cada uma vertical e larga
+    // (metade da folha) pra manter a fonte legível sem encolher.
+    function quad(tipo){
+      const c = comandaHTML(tipo, false, 5); // coluna única, ordem natural, 5 quadradinhos (cabe: célula larga)
+      folha.className = "folha quad tipo-" + tipo;
+      folha.innerHTML = [0,1,2,3].map(() => `<div class="comanda">${c}</div>`).join("");
+    }
+
     // comandas empilhadas em grade (bebidas 3/4 por folha, mais densas)
     function empilhado(tipo, n){
       const c = comandaHTML(tipo, true, 5); // grade equilibrada
@@ -379,13 +417,15 @@
 
     function render(modo, tipo){
       curModo = modo; curTipo = tipo;
-      const n = (modo === "lado") ? 2 : parseInt(modo, 10);
-      // Comidas têm poucos itens: ficam sempre em tiras verticais grandes (2/3/4).
-      // Bebidas são densas: 2 em tira vertical; 3/4 empilhadas em grade.
-      if(tipo === "comida" || modo === "lado"){
-        vertical(tipo, n);
+      // Comidas (poucos itens): 2/3 tiras verticais; 4 em 2x2 (grande, fonte legível).
+      // Bebidas (densas): 2 em tira vertical; 3/4 empilhadas em grade.
+      if(tipo === "comida"){
+        if(modo === "4") quad(tipo);
+        else vertical(tipo, modo === "lado" ? 2 : 3);
+      } else if(modo === "lado"){
+        vertical(tipo, 2);
       } else {
-        empilhado(tipo, n);
+        empilhado(tipo, parseInt(modo, 10));
       }
       toggle.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.modo == modo));
       toggleTipo.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.tipo == tipo));
