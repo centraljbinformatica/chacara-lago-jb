@@ -51,7 +51,7 @@ const CARDAPIO = {
         { nome: "Budweiser",           desc: "", preco: "12,00", img: "img/cardapio/budweiser.jpg" },
         { nome: "Antárctica 269ml",    desc: "", preco: "5,00",  img: "img/cardapio/antarctica.jpg" },
         { nome: "Antárctica 350ml",    desc: "", preco: "6,00",  img: "img/cardapio/antarctica.jpg" },
-        { nome: "Skol 269ml",          desc: "", preco: "5,00",  img: "" },
+        { nome: "Skol 269ml",          desc: "", preco: "5,00",  img: "img/cardapio/skol.jpg" },
       ],
     },
     {
