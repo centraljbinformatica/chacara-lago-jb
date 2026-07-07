@@ -137,6 +137,35 @@
     .lado .total-linha{font-size:1.12rem;}
     .lado .legenda{font-size:.66rem; margin-top:5px;}
 
+    /* Tiras verticais mais estreitas (3 ou 4 por folha): ajusta pra caber na
+       largura, mantendo a letra grande. Usado nas COMIDAS (poucos itens). */
+    .folha.cols-3 .comanda,.folha.cols-4 .comanda{padding:6mm 4mm;}
+    .cols-3 .corte-v,.cols-4 .corte-v{margin:3mm 0;}
+    .cols-3 .topo-campos,.cols-4 .topo-campos{flex-direction:column; gap:5px;}
+
+    .cols-3 .cab h1{font-size:.9rem;}
+    .cols-3 .cat h2{font-size:.78rem;}
+    .cols-3 td{font-size:.82rem; padding:2.6px 3px;}
+    .cols-3 .qbox{width:13px; height:14px; margin-left:2px;}
+    .cols-3 .topo-campos{font-size:.76rem;}
+    .cols-3 .pag-opcoes{font-size:.74rem; gap:8px;}
+    .cols-3 .total-linha{font-size:.94rem;}
+
+    .cols-4 .cab img{height:20px;}
+    .cols-4 .cab h1{font-size:.76rem;}
+    .cols-4 .cab .sub{display:none;}
+    .cols-4 .tipo-band{font-size:.58rem; letter-spacing:.3px; padding:2px 4px;}
+    .cols-4 .cat h2{font-size:.68rem; padding:2px 6px;}
+    .cols-4 td{font-size:.72rem; padding:2.2px 3px;}
+    .cols-4 .nome small{display:none;}
+    .cols-4 .qbox{width:12px; height:13px; margin-left:2px;}
+    .cols-4 .topo-campos{font-size:.64rem; gap:4px;}
+    .cols-4 .rot{font-size:.6rem;}
+    .cols-4 .pag-opcoes{font-size:.64rem; gap:6px;}
+    .cols-4 .check{width:11px; height:11px; margin-right:3px;}
+    .cols-4 .total-linha{font-size:.84rem;}
+    .cols-4 .legenda{display:none;}
+
     /* ==========================================================
        MODOS DE ECONOMIA: comandas EMPILHADAS em grade (3 ou 4 por folha)
        Menores, pra gastar menos papel. GRID (não column-count) pra
@@ -170,24 +199,6 @@
     .per-4 .rodape{margin-top:4px; padding-top:3px;}
     .per-3 .obs-rot, .per-3 .obs-linha,
     .per-4 .obs-rot, .per-4 .obs-linha{display:none;}
-
-    /* COMIDAS têm poucos itens: no 4 por folha dá pra manter a letra legível
-       (sobrescreve a compactação minúscula padrão do modo 4). */
-    .tipo-comida.per-4 .grade{grid-template-columns:repeat(2,1fr);} /* colunas mais largas: nomes não quebram, comanda encurta */
-    .tipo-comida.per-4 .cab img{height:18px;}
-    .tipo-comida.per-4 .cab h1{font-size:.8rem;}
-    .tipo-comida.per-4 .cab{padding-bottom:2px;}
-    .tipo-comida.per-4 .cab .sub{display:none;}
-    .tipo-comida.per-4 .tipo-band{font-size:.6rem; padding:1.5px 6px; margin:1.5px 0;}
-    .tipo-comida.per-4 .topo-campos{font-size:.66rem; margin:2px 0 1px;}
-    .tipo-comida.per-4 .cat h2{font-size:.7rem; padding:1.5px 7px;}
-    .tipo-comida.per-4 td{font-size:.74rem; padding:1.8px 4px; line-height:1.12;}
-    .tipo-comida.per-4 .qbox{width:12px; height:13px; margin-left:3px;}
-    .tipo-comida.per-4 .rot{font-size:.6rem;}
-    .tipo-comida.per-4 .total-linha{font-size:.82rem;}
-    /* cozinha não precisa de Pagamento: esconde esse bloco no 4 por folha e sobra espaço pra letra */
-    .tipo-comida.per-4 .rodape .bloco:first-child{display:none;}
-    .tipo-comida.per-4 .rodape{margin-top:4px; padding-top:3px;}
 
     /* BEBIDAS no 2 lado a lado: como sobra espaço, respira mais e letra um pouco maior */
     .tipo-bebida.lado .cat h2{font-size:.9rem; padding:3px 8px;}
@@ -256,8 +267,7 @@
     function precoFmt(n){ return n.toFixed(2).replace(".",","); }
     function precoPromo(txt){ const m = String(txt).match(/(\d+)(?!.*\d)/); return m ? m[1]+",00" : "0,00"; }
 
-    const NBOX = 5; // quantos quadradinhos por item
-    function boxes(){ let s=""; for(let i=0;i<NBOX;i++) s+='<span class="qbox"></span>'; return s; }
+    function boxes(n){ let s=""; for(let i=0;i<n;i++) s+='<span class="qbox"></span>'; return s; }
 
     // monta blocos de um conjunto de grupos: subgrupos viram categoria única; guarda a promo (ex.: Drinks)
     function buildBlocos(grupos){
@@ -274,29 +284,29 @@
     const BLOCOS = { comida: buildBlocos(CARDAPIO.comida), bebida: buildBlocos(CARDAPIO.bebida) };
     const TIPO_ROT = { comida: "🍽️ COMIDAS · Cozinha", bebida: "🥤 BEBIDAS · Bar" };
 
-    function linha(nome, desc, preco, promo){
+    function linha(nome, desc, preco, promo, nbox){
       return `<tr class="${promo ? "promo-row" : ""}">
         <td class="nome">${nome}${desc ? `<small> ${desc}</small>` : ""}</td>
         <td class="pcol">${preco}</td>
-        <td class="qcol">${boxes()}</td>
+        <td class="qcol">${boxes(nbox)}</td>
       </tr>`;
     }
 
     // Na tira vertical mantemos a ordem natural do cardápio (coluna única).
     // Nos modos em grade, categorias maiores primeiro equilibram as colunas.
-    function gradeHTML(lista, ordenar){
+    function gradeHTML(lista, ordenar, nbox){
       const arr = ordenar ? lista.slice().sort((a,b)=>b.itens.length-a.itens.length) : lista;
       return arr.map((b) => `
         <div class="cat">
           <h2>${b.icone} ${b.categoria}</h2>
           <table><tbody>
-            ${b.promo ? linha("Drink em dobro", "2 unidades", precoFmt(precoNum(precoPromo(b.promo))), true) : ""}
-            ${b.itens.map((it) => linha(it.nome, it.desc, precoFmt(precoNum(it.preco)), false)).join("")}
+            ${b.promo ? linha("Drink em dobro", "2 unidades", precoFmt(precoNum(precoPromo(b.promo))), true, nbox) : ""}
+            ${b.itens.map((it) => linha(it.nome, it.desc, precoFmt(precoNum(it.preco)), false, nbox)).join("")}
           </tbody></table>
         </div>`).join("");
     }
 
-    function comandaHTML(tipo, ordenar){
+    function comandaHTML(tipo, ordenar, nbox){
       return `
       <div class="cab">
         <img src="img/logo.png" alt="" onerror="this.style.display='none'" />
@@ -312,7 +322,7 @@
         <div class="c"><b>Garçom:</b><span class="linha-preencher"></span></div>
         <div class="c"><b>Data:</b><span class="linha-preencher"></span></div>
       </div>
-      <div class="grade">${gradeHTML(BLOCOS[tipo], ordenar)}</div>
+      <div class="grade">${gradeHTML(BLOCOS[tipo], ordenar, nbox)}</div>
       <div class="rodape">
         <div class="bloco">
           <div class="rot">Pagamento</div>
@@ -340,25 +350,42 @@
     let curModo = "lado";
     let curTipo = "comida";
 
+    // quantos quadradinhos por item conforme a largura da tira/célula
+    function nboxPara(cols){ return cols >= 4 ? 3 : cols === 3 ? 4 : 5; }
+
+    // tiras verticais lado a lado (estilo restaurante), com "cols" colunas
+    function vertical(tipo, cols){
+      const c = comandaHTML(tipo, false, nboxPara(cols)); // coluna única, ordem natural
+      folha.className = "folha lado cols-" + cols + " tipo-" + tipo;
+      let html = "";
+      for(let i=0;i<cols;i++){
+        html += `<div class="comanda">${c}</div>`;
+        if(i < cols-1) html += `<div class="corte-v"><span>✂ corte aqui</span></div>`;
+      }
+      folha.innerHTML = html;
+    }
+
+    // comandas empilhadas em grade (bebidas 3/4 por folha, mais densas)
+    function empilhado(tipo, n){
+      const c = comandaHTML(tipo, true, 5); // grade equilibrada
+      let html = "";
+      for(let i=0;i<n;i++){
+        html += `<div class="comanda">${c}</div>`;
+        if(i < n-1) html += `<div class="corte">✂ &nbsp; corte aqui &nbsp; ✂</div>`;
+      }
+      folha.className = "folha per-" + n + " tipo-" + tipo;
+      folha.innerHTML = html;
+    }
+
     function render(modo, tipo){
       curModo = modo; curTipo = tipo;
-      if(modo === "lado"){
-        const c = comandaHTML(tipo, false); // coluna única, ordem natural
-        folha.className = "folha lado tipo-" + tipo;
-        folha.innerHTML =
-          `<div class="comanda">${c}</div>` +
-          `<div class="corte-v"><span>✂ corte aqui</span></div>` +
-          `<div class="comanda">${c}</div>`;
+      const n = (modo === "lado") ? 2 : parseInt(modo, 10);
+      // Comidas têm poucos itens: ficam sempre em tiras verticais grandes (2/3/4).
+      // Bebidas são densas: 2 em tira vertical; 3/4 empilhadas em grade.
+      if(tipo === "comida" || modo === "lado"){
+        vertical(tipo, n);
       } else {
-        const n = parseInt(modo, 10);
-        const c = comandaHTML(tipo, true); // grade equilibrada
-        let html = "";
-        for(let i=0;i<n;i++){
-          html += `<div class="comanda">${c}</div>`;
-          if(i < n-1) html += `<div class="corte">✂ &nbsp; corte aqui &nbsp; ✂</div>`;
-        }
-        folha.className = "folha per-" + n + " tipo-" + tipo;
-        folha.innerHTML = html;
+        empilhado(tipo, n);
       }
       toggle.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.modo == modo));
       toggleTipo.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.tipo == tipo));
