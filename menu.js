@@ -32,7 +32,7 @@ const CARDAPIO = {
       icone: "🍟",
       itens: [
         { nome: "Isca de Pirarucu",     desc: "500g · serve até 3 pessoas",         preco: "50,00", img: "img/cardapio/isca-pirarucu.jpg" },
-        { nome: "Bolinho de Piracuí",   desc: "12 unidades · serve até 3 pessoas",  preco: "35,00", img: "img/cardapio/bolinho-piracui.jpg" },
+        { nome: "Bolinho de Piracuí",   desc: "12 unidades · serve até 3 pessoas",  preco: "50,00", img: "img/cardapio/bolinho-piracui.jpg" },
         { nome: "Isca de Frango",       desc: "400g · serve até 3 pessoas",         preco: "35,00", img: "img/cardapio/isca-frango.jpg" },
         { nome: "Calabresa Acebolada",  desc: "400g · serve até 3 pessoas",         preco: "30,00", img: "img/cardapio/calabresa-acebolada.jpg" },
         { nome: "Batata Frita Rústica", desc: "400g · serve até 3 pessoas",         preco: "25,00", img: "img/cardapio/batata-rustica.jpg" },
@@ -49,7 +49,9 @@ const CARDAPIO = {
         { nome: "Corona",              desc: "", preco: "12,00", img: "img/cardapio/corona.jpg" },
         { nome: "Heineken",            desc: "", preco: "12,00", img: "img/cardapio/heineken.jpg" },
         { nome: "Budweiser",           desc: "", preco: "12,00", img: "img/cardapio/budweiser.jpg" },
-        { nome: "Antárctica",          desc: "", preco: "5,00",  img: "img/cardapio/antarctica.jpg" },
+        { nome: "Antárctica 269ml",    desc: "", preco: "5,00",  img: "img/cardapio/antarctica.jpg" },
+        { nome: "Antárctica 350ml",    desc: "", preco: "6,00",  img: "img/cardapio/antarctica.jpg" },
+        { nome: "Skol 269ml",          desc: "", preco: "5,00",  img: "" },
       ],
     },
     {
