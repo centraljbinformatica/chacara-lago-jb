@@ -76,6 +76,7 @@
     td{padding:1.4px 3px; border-bottom:.6px solid #e7ebf0; line-height:1.1; vertical-align:middle;}
     .nome small{color:#8b95a3;}
     .pcol{text-align:right; color:var(--laranja); font-weight:700; white-space:nowrap;}
+    .preco-livre{display:inline-block; width:38px; border-bottom:1px solid var(--linha); height:1em; vertical-align:middle;} /* preço a preencher */
     .qcol{text-align:right; white-space:nowrap; width:1%;}
     .qbox{display:inline-block; border:1.1px solid #8b95a3; border-radius:2px; margin-left:2px; vertical-align:middle;}
 
@@ -152,17 +153,18 @@
     .quad .cab h1{font-size:1.02rem;}
     .quad .cab .sub{font-size:.6rem;}
     .quad .tipo-band{font-size:.74rem; margin:2px 0 1px;}
-    .quad .topo-campos{gap:3px 14px; margin:3px 0 2px; font-size:.84rem;}
+    .quad .topo-campos{gap:3px 14px; margin:2px 0 1px; font-size:.84rem;}
     .quad .topo-campos .c{min-width:0;}                         /* Nome + Pessoas numa linha só */
     .quad .nome-c{flex:3;}
     .quad .pessoas-c{flex:1.5;}
-    .quad .grade{margin-top:2px;}
-    .quad .cat{margin-bottom:1px;}
-    .quad .cat h2{font-size:.84rem; padding:2px 8px;}
-    .quad td{font-size:.92rem; padding:2px 4px;}
+    .quad .grade{margin-top:1px;}
+    .quad .cat{margin-bottom:0;}
+    .quad .cat h2{font-size:.84rem; padding:1.5px 8px;}
+    /* mesma fonte, mas entrelinha e padding menores pra caber o item novo sem estourar */
+    .quad td{font-size:.92rem; padding:1px 4px; line-height:1.05;}
     .quad .nome small{display:none;}
     .quad .qbox{width:15px; height:16px; margin-left:3px;}
-    .quad .rodape{margin-top:auto; flex-direction:column; align-items:stretch; gap:5px; padding-top:5px;}
+    .quad .rodape{margin-top:auto; flex-direction:column; align-items:stretch; gap:4px; padding-top:4px;}
     .quad .rodape .bloco{flex:none;}
     .quad .total-cx{max-width:none;}
     .quad .rot{font-size:.68rem;}
@@ -329,6 +331,13 @@
     const BLOCOS = { comida: buildBlocos(CARDAPIO.comida), bebida: buildBlocos(CARDAPIO.bebida) };
     const TIPO_ROT = { comida: "🍽️ COMIDAS · Cozinha", bebida: "🥤 BEBIDAS · Bar" };
 
+    // Item novo só na comanda (não vai pro cardápio digital): Galinha Caipira nas porções,
+    // com preço em branco pra preencher à mão quando decidirem o valor.
+    (function(){
+      const petiscos = (BLOCOS.comida || []).find((g) => /petisco|por[cç]/i.test(g.categoria));
+      if(petiscos) petiscos.itens = petiscos.itens.concat([{ nome:"Galinha Caipira", desc:"", precoLivre:true }]);
+    })();
+
     function linha(nome, desc, preco, promo, nbox){
       return `<tr class="${promo ? "promo-row" : ""}">
         <td class="nome">${nome}${desc ? `<small> ${desc}</small>` : ""}</td>
@@ -346,7 +355,7 @@
           <h2>${b.icone} ${b.categoria}</h2>
           <table><tbody>
             ${b.promo ? linha("Drink em dobro", "2 unidades", precoFmt(precoNum(precoPromo(b.promo))), true, nbox) : ""}
-            ${b.itens.map((it) => linha(it.nome, it.desc, precoFmt(precoNum(it.preco)), false, nbox)).join("")}
+            ${b.itens.map((it) => linha(it.nome, it.desc, it.precoLivre ? '<span class="preco-livre"></span>' : precoFmt(precoNum(it.preco)), false, nbox)).join("")}
           </tbody></table>
         </div>`).join("");
     }
