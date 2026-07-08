@@ -138,34 +138,45 @@
     .lado .legenda{font-size:.66rem; margin-top:5px;}
 
     /* 4 POR FOLHA EM 2x2 (comidas): células largas (metade da folha), fonte
-       legível como no 2 lado a lado. Linhas tracejadas de corte no meio. */
-    .folha.quad{display:grid; grid-template-columns:1fr 1fr;}
-    .folha.quad .comanda{
+       bem legível. Linhas tracejadas de corte no meio. Vale tanto pra folha
+       única (.folha.quad) quanto pra cada página numerada (.pagina.quad). */
+    .quad{display:grid; grid-template-columns:1fr 1fr;}
+    .quad .comanda{
       padding:4mm 7mm; display:flex; flex-direction:column;
       border-right:1.2px dashed #9aa3af; border-bottom:1.2px dashed #9aa3af;
     }
-    .folha.quad .comanda:nth-child(2n){border-right:none;}   /* coluna da direita: sem borda à direita */
-    .folha.quad .comanda:nth-child(n+3){border-bottom:none;} /* linha de baixo: sem borda embaixo */
+    .quad .comanda:nth-child(2n){border-right:none;}            /* coluna da direita: sem borda à direita */
+    .folha.quad > .comanda:nth-child(n+3){border-bottom:none;}  /* na folha única, tira a borda da fila de baixo */
     .quad .cab img{height:24px;}
-    .quad .cab h1{font-size:1rem;}
+    .quad .cab h1{font-size:1.02rem;}
     .quad .cab .sub{font-size:.6rem;}
-    .quad .tipo-band{font-size:.72rem; margin:2px 0 1px;}
-    .quad .topo-campos{gap:3px 12px; margin:3px 0 2px; font-size:.8rem;}
+    .quad .tipo-band{font-size:.74rem; margin:2px 0 1px;}
+    .quad .topo-campos{gap:3px 14px; margin:3px 0 2px; font-size:.84rem;}
+    .quad .topo-campos .c{min-width:0;}                         /* Nome + Pessoas numa linha só */
+    .quad .nome-c{flex:3;}
+    .quad .pessoas-c{flex:1.5;}
     .quad .grade{margin-top:2px;}
     .quad .cat{margin-bottom:1px;}
-    .quad .cat h2{font-size:.82rem; padding:1.5px 8px;}
-    .quad td{font-size:.88rem; padding:2px 4px;}
+    .quad .cat h2{font-size:.84rem; padding:2px 8px;}
+    .quad td{font-size:.92rem; padding:2px 4px;}
     .quad .nome small{display:none;}
-    .quad .qbox{width:14px; height:15px; margin-left:3px;}
-    .quad .topo-campos .c{min-width:0;} /* campos numa linha só, sem esticar */
+    .quad .qbox{width:15px; height:16px; margin-left:3px;}
     .quad .rodape{margin-top:auto; flex-direction:column; align-items:stretch; gap:5px; padding-top:5px;}
     .quad .rodape .bloco{flex:none;}
     .quad .total-cx{max-width:none;}
-    .quad .rot{font-size:.64rem;}
-    .quad .total-linha{font-size:1rem;}
+    .quad .rot{font-size:.68rem;}
+    .quad .total-linha{font-size:1.1rem;}
     .quad .legenda{display:none;}
     /* cozinha não precisa de Pagamento: some com esse trecho e sobra altura (mantém Observações e Total) */
     .quad .pag-rot,.quad .pag-opcoes{display:none;}
+
+    /* Páginas da versão numerada: cada grupo de 4 numa folha A4 (quebra garantida) */
+    .folha.numeradas{background:transparent; width:auto;}
+    .pagina{break-after:page; page-break-after:always;}
+    .pagina:last-child{break-after:auto; page-break-after:avoid;}
+    @media screen{
+      .pagina{background:#fff; box-shadow:0 6px 24px rgba(0,0,0,.12); margin:0 auto 18px; width:210mm;}
+    }
 
     /* Tiras verticais mais estreitas (3 ou 4 por folha): ajusta pra caber na
        largura, mantendo a letra grande. Usado nas COMIDAS (poucos itens). */
@@ -269,6 +280,7 @@
       <button data-modo="3">3 por folha</button>
       <button data-modo="4">4 por folha</button>
     </div>
+    <button class="btn sec" id="btnNum">🔢 Numeradas 1–100</button>
     <button class="btn sec" onclick="location.href='comanda.html'">↤ Digital</button>
     <button class="btn" onclick="window.print()">🖨️ Imprimir / PDF</button>
   </div>
@@ -278,7 +290,8 @@
     <span style="font-weight:700; color:#d9641a;">🍽️ Comidas:</span>
     <a class="btn sec" href="pdf/comanda-comidas-2-por-folha.pdf" download>⬇ 2 lado a lado</a>
     <a class="btn sec" href="pdf/comanda-comidas-3-por-folha.pdf" download>⬇ 3</a>
-    <a class="btn sec" href="pdf/comanda-comidas-4-por-folha.pdf" download>⬇ 4</a>
+    <a class="btn sec" href="pdf/comanda-comidas-4-por-folha.pdf" download>⬇ 4 (2×2)</a>
+    <a class="btn sec" href="pdf/comanda-comidas-numeradas-1-a-100.pdf" download>⬇ Numeradas 1–100</a>
   </div>
   <div class="acoes" style="border-top:none; box-shadow:none; padding-top:0;">
     <p style="flex:1; min-width:240px;"></p>
@@ -336,7 +349,21 @@
         </div>`).join("");
     }
 
-    function comandaHTML(tipo, ordenar, nbox){
+    // campos do topo: comida = Nome do cliente + Nº de pessoas; bebida = Mesa/Garçom/Data
+    function campos(tipo){
+      if(tipo === "comida"){
+        return `
+        <div class="c nome-c"><b>Nome:</b><span class="linha-preencher"></span></div>
+        <div class="c pessoas-c"><b>Nº de pessoas:</b><span class="linha-preencher"></span></div>`;
+      }
+      return `
+        <div class="c"><b>Mesa:</b><span class="linha-preencher"></span></div>
+        <div class="c"><b>Garçom:</b><span class="linha-preencher"></span></div>
+        <div class="c"><b>Data:</b><span class="linha-preencher"></span></div>`;
+    }
+
+    function comandaHTML(tipo, ordenar, nbox, numero){
+      const nro = (numero != null) ? String(numero).padStart(3, "0") : "______";
       return `
       <div class="cab">
         <img src="img/logo.png" alt="" onerror="this.style.display='none'" />
@@ -344,14 +371,10 @@
           <h1>Chácara Lago JB</h1>
           <div class="sub">Vila Amazônia, Parintins</div>
         </div>
-        <div class="comanda-tag">COMANDA Nº ______</div>
+        <div class="comanda-tag">COMANDA Nº ${nro}</div>
       </div>
       <div class="tipo-band ${tipo}">${TIPO_ROT[tipo]}</div>
-      <div class="topo-campos">
-        <div class="c"><b>Mesa:</b><span class="linha-preencher"></span></div>
-        <div class="c"><b>Garçom:</b><span class="linha-preencher"></span></div>
-        <div class="c"><b>Data:</b><span class="linha-preencher"></span></div>
-      </div>
+      <div class="topo-campos">${campos(tipo)}</div>
       <div class="grade">${gradeHTML(BLOCOS[tipo], ordenar, nbox)}</div>
       <div class="rodape">
         <div class="bloco">
@@ -403,6 +426,21 @@
       folha.innerHTML = [0,1,2,3].map(() => `<div class="comanda">${c}</div>`).join("");
     }
 
+    // comandas JÁ NUMERADAS de 1 até "total": 2x2 por folha, uma página por grupo
+    // de 4 (quebra de página garantida). Usa o mesmo tamanho grande do 2x2.
+    function numeradas(tipo, total){
+      let html = "";
+      for(let inicio=1; inicio<=total; inicio+=4){
+        let cells = "";
+        for(let k=inicio; k<=Math.min(inicio+3, total); k++){
+          cells += `<div class="comanda">${comandaHTML(tipo, false, 5, k)}</div>`;
+        }
+        html += `<div class="pagina"><div class="quad tipo-${tipo}">${cells}</div></div>`;
+      }
+      folha.className = "folha numeradas";
+      folha.innerHTML = html;
+    }
+
     // comandas empilhadas em grade (bebidas 3/4 por folha, mais densas)
     function empilhado(tipo, n){
       const c = comandaHTML(tipo, true, 5); // grade equilibrada
@@ -415,8 +453,9 @@
       folha.innerHTML = html;
     }
 
-    function render(modo, tipo){
+    function render(modo, tipo, num){
       curModo = modo; curTipo = tipo;
+      if(num > 0){ numeradas(tipo, num); return; } // versão numerada (1..num)
       // Comidas (poucos itens): 2/3 tiras verticais; 4 em 2x2 (grande, fonte legível).
       // Bebidas (densas): 2 em tira vertical; 3/4 empilhadas em grade.
       if(tipo === "comida"){
@@ -440,12 +479,17 @@
       if (b) render(curModo, b.dataset.tipo);
     });
 
-    // abre no formato/tipo da URL (?modo=lado|3|4 & ?tipo=comida|bebida)
+    // abre no formato/tipo da URL (?modo=lado|3|4 & ?tipo=comida|bebida & ?num=100)
     const p = new URLSearchParams(location.search);
     let modo = p.get("modo");
     if(!modo){ const n = p.get("n"); modo = (n==="3"||n==="4") ? n : "lado"; }
     let tipo = p.get("tipo");
-    render(["lado","3","4"].includes(modo) ? modo : "lado", ["comida","bebida"].includes(tipo) ? tipo : "comida");
+    const num = parseInt(p.get("num"), 10) || 0;
+    render(["lado","3","4"].includes(modo) ? modo : "lado", ["comida","bebida"].includes(tipo) ? tipo : "comida", num);
+
+    // botão "Numeradas 1–100" (usa o tipo atual)
+    const btnNum = document.getElementById("btnNum");
+    if(btnNum) btnNum.addEventListener("click", () => render(curModo, curTipo, 100));
   })();
   </script>
 </body>
