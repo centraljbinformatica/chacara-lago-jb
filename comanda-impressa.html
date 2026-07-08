@@ -60,6 +60,7 @@
 
     .topo-campos{display:flex; gap:10px; flex-wrap:wrap; margin:5px 0 2px; font-size:.7rem;}
     .topo-campos .c{flex:1; min-width:80px; display:flex; align-items:flex-end; gap:5px;}
+    .topo-campos .nome-c{flex:2.5;} .topo-campos .pessoas-c{flex:1;} /* Nome com mais espaço pra escrever */
     .topo-campos .c b{white-space:nowrap;}
     .linha-preencher{flex:1; border-bottom:1.1px solid var(--linha); height:1em;}
 
@@ -102,8 +103,8 @@
        ========================================================== */
     /* Sem min-height fixo: as duas tiras crescem com o conteúdo (ocupam quase
        a folha toda) e ficam SEMPRE em 1 página, sem risco de estourar pro A4. */
-    .folha.lado{ display:flex; align-items:stretch; }
-    .folha.lado .comanda{
+    .lado{ display:flex; align-items:stretch; }
+    .lado > .comanda{
       flex:1 1 0; min-width:0;
       padding:6mm 6mm; display:flex; flex-direction:column;
     }
@@ -299,6 +300,7 @@
     <a class="btn sec" href="pdf/comanda-bebidas-2-por-folha.pdf" download>⬇ 2 lado a lado</a>
     <a class="btn sec" href="pdf/comanda-bebidas-3-por-folha.pdf" download>⬇ 3</a>
     <a class="btn sec" href="pdf/comanda-bebidas-4-por-folha.pdf" download>⬇ 4</a>
+    <a class="btn sec" href="pdf/comanda-bebidas-numeradas-1-a-100.pdf" download>⬇ Numeradas 1–100</a>
   </div>
 
   <div class="folha lado" id="folha"></div>
@@ -349,17 +351,11 @@
         </div>`).join("");
     }
 
-    // campos do topo: comida = Nome do cliente + Nº de pessoas; bebida = Mesa/Garçom/Data
+    // campos do topo (iguais nos dois tipos): Nome do cliente + Nº de pessoas
     function campos(tipo){
-      if(tipo === "comida"){
-        return `
+      return `
         <div class="c nome-c"><b>Nome:</b><span class="linha-preencher"></span></div>
         <div class="c pessoas-c"><b>Nº de pessoas:</b><span class="linha-preencher"></span></div>`;
-      }
-      return `
-        <div class="c"><b>Mesa:</b><span class="linha-preencher"></span></div>
-        <div class="c"><b>Garçom:</b><span class="linha-preencher"></span></div>
-        <div class="c"><b>Data:</b><span class="linha-preencher"></span></div>`;
     }
 
     function comandaHTML(tipo, ordenar, nbox, numero){
@@ -426,16 +422,26 @@
       folha.innerHTML = [0,1,2,3].map(() => `<div class="comanda">${c}</div>`).join("");
     }
 
-    // comandas JÁ NUMERADAS de 1 até "total": 2x2 por folha, uma página por grupo
-    // de 4 (quebra de página garantida). Usa o mesmo tamanho grande do 2x2.
+    // comandas JÁ NUMERADAS de 1 até "total", no formato de cada tipo:
+    //  - comida: 2x2 (4 por folha)  - bebida: 2 lado a lado (2 por folha)
+    // Uma página por grupo, com quebra de página garantida.
     function numeradas(tipo, total){
+      const porFolha = (tipo === "comida") ? 4 : 2;
       let html = "";
-      for(let inicio=1; inicio<=total; inicio+=4){
-        let cells = "";
-        for(let k=inicio; k<=Math.min(inicio+3, total); k++){
-          cells += `<div class="comanda">${comandaHTML(tipo, false, 5, k)}</div>`;
+      for(let inicio=1; inicio<=total; inicio+=porFolha){
+        const fim = Math.min(inicio + porFolha - 1, total);
+        if(tipo === "comida"){
+          let cells = "";
+          for(let k=inicio; k<=fim; k++) cells += `<div class="comanda">${comandaHTML(tipo, false, 5, k)}</div>`;
+          html += `<div class="pagina"><div class="quad tipo-${tipo}">${cells}</div></div>`;
+        } else {
+          let inner = "";
+          for(let k=inicio; k<=fim; k++){
+            inner += `<div class="comanda">${comandaHTML(tipo, false, 5, k)}</div>`;
+            if(k < fim) inner += `<div class="corte-v"><span>✂ corte aqui</span></div>`;
+          }
+          html += `<div class="pagina"><div class="lado tipo-${tipo}">${inner}</div></div>`;
         }
-        html += `<div class="pagina"><div class="quad tipo-${tipo}">${cells}</div></div>`;
       }
       folha.className = "folha numeradas";
       folha.innerHTML = html;
