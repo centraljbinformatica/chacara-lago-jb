@@ -10,7 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
-    :root{ --azul:#1d3f70; --laranja:#d9641a; --linha:#bcc4cf; --txt:#1f2a37; }
+    /* Tons de cinza escuro: imprimem nítido em impressora P&B (o design continua,
+       só que monocromático = o que você vê é igual ao que sai no papel). */
+    :root{ --azul:#232b33; --laranja:#3b444d; --linha:#b8c0cc; --txt:#1f2a37; }
     *{box-sizing:border-box;}
     html,body{margin:0; font-family:'Inter',system-ui,sans-serif; color:var(--txt); background:#e9edf2;}
 
@@ -60,7 +62,7 @@
 
     .topo-campos{display:flex; gap:10px; flex-wrap:wrap; margin:5px 0 2px; font-size:.7rem;}
     .topo-campos .c{flex:1; min-width:80px; display:flex; align-items:flex-end; gap:5px;}
-    .topo-campos .nome-c{flex:2.5;} .topo-campos .pessoas-c{flex:1;} /* Nome com mais espaço pra escrever */
+    .topo-campos .nome-c{flex:1.7;} .topo-campos .pessoas-c{flex:1.4;} /* equilibra: Nome não rouba a linha de "Nº de pessoas" */
     .topo-campos .c b{white-space:nowrap;}
     .linha-preencher{flex:1; border-bottom:1.1px solid var(--linha); height:1em;}
 
@@ -78,12 +80,12 @@
     .pcol{text-align:right; color:var(--laranja); font-weight:700; white-space:nowrap;}
     .preco-livre{display:inline-block; width:38px; border-bottom:1px solid var(--linha); height:1em; vertical-align:middle;} /* preço a preencher */
     .qcol{text-align:right; white-space:nowrap; width:1%;}
-    .qbox{display:inline-block; border:1.1px solid #8b95a3; border-radius:2px; margin-left:2px; vertical-align:middle;}
+    .qbox{display:inline-block; border:1.2px solid #4b5563; border-radius:2px; margin-left:2px; vertical-align:middle;}
 
-    /* Linha de promoção "Drink em dobro" */
-    .promo-row td{background:#fdeede;}
-    .promo-row .nome{color:#b34d12; font-weight:800;}
-    .promo-row .pcol{color:#b34d12;}
+    /* Linha de promoção "Drink em dobro" (destaque em cinza claro, imprime bem em P&B) */
+    .promo-row td{background:#e9ecf0;}
+    .promo-row .nome{color:var(--txt); font-weight:800; border-left:3px solid var(--azul); padding-left:5px;}
+    .promo-row .pcol{color:var(--txt);}
 
     /* Rodapé */
     .rodape{margin-top:7px; border-top:1.4px dashed #9aa3af; padding-top:5px; display:flex; gap:12px; align-items:flex-end;}
@@ -155,8 +157,8 @@
     .quad .tipo-band{font-size:.74rem; margin:2px 0 1px;}
     .quad .topo-campos{gap:3px 14px; margin:2px 0 1px; font-size:.84rem;}
     .quad .topo-campos .c{min-width:0;}                         /* Nome + Pessoas numa linha só */
-    .quad .nome-c{flex:3;}
-    .quad .pessoas-c{flex:1.5;}
+    .quad .nome-c{flex:1.9;}
+    .quad .pessoas-c{flex:1.7;}
     .quad .grade{margin-top:1px;}
     .quad .cat{margin-bottom:0;}
     .quad .cat h2{font-size:.84rem; padding:1.5px 8px;}
@@ -253,10 +255,12 @@
     .tipo-bebida.lado .pag-opcoes{font-size:.94rem;}
     .tipo-bebida.lado .total-linha{font-size:1.2rem;}
 
-    /* Faixa do tipo (Cozinha/Bar) pra distinguir na hora as duas versões */
-    .tipo-band{text-align:center; font-weight:800; letter-spacing:1px; color:#fff; border-radius:5px; margin:4px 0 2px; padding:3px 6px;}
+    /* Faixa do tipo (Cozinha/Bar): diferencia em P&B por PADRÃO, não por cor.
+       Comida = faixa sólida. Bebida = faixa listrada (diagonal). */
+    .tipo-band{text-align:center; font-weight:800; letter-spacing:1px; color:#fff; border-radius:5px; margin:4px 0 2px; padding:3px 6px;
+      text-shadow:0 1px 1px rgba(0,0,0,.35);}
     .tipo-band.comida{background:var(--laranja);}
-    .tipo-band.bebida{background:var(--azul);}
+    .tipo-band.bebida{background:repeating-linear-gradient(45deg, #232b33, #232b33 5px, #525c67 5px, #525c67 10px);}
     .lado .tipo-band{font-size:.82rem; margin:5px 0 3px;}
     .per-3 .tipo-band{font-size:.5rem; padding:1px 5px; margin:2px 0 1px;}
     .per-4 .tipo-band{font-size:.46rem; padding:1px 5px; margin:1px 0;}
