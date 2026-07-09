@@ -260,7 +260,7 @@
     .tipo-band{text-align:center; font-weight:800; letter-spacing:1px; color:#fff; border-radius:5px; margin:4px 0 2px; padding:3px 6px;
       text-shadow:0 1px 1px rgba(0,0,0,.35);}
     .tipo-band.comida{background:var(--laranja);}
-    .tipo-band.bebida{background:repeating-linear-gradient(45deg, #232b33, #232b33 5px, #525c67 5px, #525c67 10px);}
+    .tipo-band.bebida{background:var(--azul);}
     .lado .tipo-band{font-size:.82rem; margin:5px 0 3px;}
     .per-3 .tipo-band{font-size:.5rem; padding:1px 5px; margin:2px 0 1px;}
     .per-4 .tipo-band{font-size:.46rem; padding:1px 5px; margin:1px 0;}
@@ -333,7 +333,7 @@
     }
     // duas versões separadas: comidas (cozinha) e bebidas (bar)
     const BLOCOS = { comida: buildBlocos(CARDAPIO.comida), bebida: buildBlocos(CARDAPIO.bebida) };
-    const TIPO_ROT = { comida: "🍽️ COMIDAS · Cozinha", bebida: "🥤 BEBIDAS · Bar" };
+    const TIPO_ROT = { comida: "COMIDAS · Cozinha", bebida: "BEBIDAS · Bar" };
 
     // Item novo só na comanda (não vai pro cardápio digital): Galinha Caipira nas porções,
     // com preço em branco pra preencher à mão quando decidirem o valor.
@@ -356,7 +356,7 @@
       const arr = ordenar ? lista.slice().sort((a,b)=>b.itens.length-a.itens.length) : lista;
       return arr.map((b) => `
         <div class="cat">
-          <h2>${b.icone} ${b.categoria}</h2>
+          <h2>${b.categoria}</h2>
           <table><tbody>
             ${b.promo ? linha("Drink em dobro", "2 unidades", precoFmt(precoNum(precoPromo(b.promo))), true, nbox) : ""}
             ${b.itens.map((it) => linha(it.nome, it.desc, it.precoLivre ? '<span class="preco-livre"></span>' : precoFmt(precoNum(it.preco)), false, nbox)).join("")}
