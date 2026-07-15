@@ -44,9 +44,9 @@ const CARDAPIO = {
       icone: "🍖",
       nota: "Pratos completos pra compartilhar (servem a mesa toda).",
       itens: [
-        { nome: "Picanha",         desc: "500g · serve 2 · batata frita, arroz, vinagrete/batatonese e farofa",   preco: "130,00", img: "" },
-        { nome: "Galinha Caipira", desc: "Inteira · serve 4 · macarrão, arroz e farofa",                           preco: "120,00", img: "" },
-        { nome: "Tambaqui",        desc: "Banda · serve 3 · salada de feijão fradinho, arroz, vinagrete e farofa",  preco: "130,00", img: "" },
+        { nome: "Picanha",         desc: "500g · serve 2 · batata frita, arroz, vinagrete/batatonese e farofa",   preco: "130,00", img: "img/cardapio/picanha.jpg" },
+        { nome: "Galinha Caipira", desc: "Inteira · serve 4 · macarrão, arroz e farofa",                           preco: "120,00", img: "img/cardapio/galinha-caipira.jpg" },
+        { nome: "Tambaqui",        desc: "Banda · serve 3 · salada de feijão fradinho, arroz, vinagrete e farofa",  preco: "130,00", img: "img/cardapio/tambaqui.jpg" },
       ],
     },
   ],
