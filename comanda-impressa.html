@@ -151,7 +151,7 @@
     }
     .quad .comanda:nth-child(2n){border-right:none;}            /* coluna da direita: sem borda à direita */
     .folha.quad > .comanda:nth-child(n+3){border-bottom:none;}  /* na folha única, tira a borda da fila de baixo */
-    .quad .cab img{height:24px;}
+    .quad .cab img{height:20px;}
     .quad .cab h1{font-size:1.02rem;}
     .quad .cab .sub{font-size:.6rem;}
     .quad .tipo-band{font-size:.74rem; margin:2px 0 1px;}
@@ -161,12 +161,12 @@
     .quad .pessoas-c{flex:1.7;}
     .quad .grade{margin-top:1px;}
     .quad .cat{margin-bottom:0;}
-    .quad .cat h2{font-size:.84rem; padding:1.5px 8px;}
+    .quad .cat h2{font-size:.84rem; padding:1px 8px;}
     /* mesma fonte, mas entrelinha e padding menores pra caber o item novo sem estourar */
-    .quad td{font-size:.92rem; padding:1px 4px; line-height:1.05;}
+    .quad td{font-size:.92rem; padding:0.4px 4px; line-height:1.0;}
     .quad .nome small{display:none;}
     .quad .qbox{width:15px; height:16px; margin-left:3px;}
-    .quad .rodape{margin-top:auto; flex-direction:column; align-items:stretch; gap:4px; padding-top:4px;}
+    .quad .rodape{margin-top:auto; flex-direction:column; align-items:stretch; gap:3px; padding-top:3px;}
     .quad .rodape .bloco{flex:none;}
     .quad .total-cx{max-width:none;}
     .quad .rot{font-size:.68rem;}
@@ -334,13 +334,6 @@
     // duas versões separadas: comidas (cozinha) e bebidas (bar)
     const BLOCOS = { comida: buildBlocos(CARDAPIO.comida), bebida: buildBlocos(CARDAPIO.bebida) };
     const TIPO_ROT = { comida: "COMIDAS · Cozinha", bebida: "BEBIDAS · Bar" };
-
-    // Item novo só na comanda (não vai pro cardápio digital): Galinha Caipira nas porções,
-    // com preço em branco pra preencher à mão quando decidirem o valor.
-    (function(){
-      const petiscos = (BLOCOS.comida || []).find((g) => /petisco|por[cç]/i.test(g.categoria));
-      if(petiscos) petiscos.itens = petiscos.itens.concat([{ nome:"Galinha Caipira", desc:"", precoLivre:true }]);
-    })();
 
     function linha(nome, desc, preco, promo, nbox){
       return `<tr class="${promo ? "promo-row" : ""}">

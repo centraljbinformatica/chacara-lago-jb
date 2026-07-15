@@ -19,8 +19,8 @@ const CARDAPIO = {
       icone: "🍢",
       nota: "Todos acompanham arroz, farofa e batatonese/vinagrete. Os medalhões vêm com molho mostarda e mel.",
       itens: [
-        { nome: "Medalhão de Carne",   desc: "Carne e bacon",     preco: "25,00", img: "img/cardapio/medalhao-carne.jpg" },
-        { nome: "Medalhão de Frango",  desc: "Frango e bacon",    preco: "25,00", img: "img/cardapio/medalhao-frango.jpg" },
+        { nome: "Medalhão de Carne",   desc: "Carne e bacon",     preco: "30,00", img: "img/cardapio/medalhao-carne.jpg" },
+        { nome: "Medalhão de Frango",  desc: "Frango e bacon",    preco: "30,00", img: "img/cardapio/medalhao-frango.jpg" },
         { nome: "Espeto de Carne",     desc: "",                  preco: "20,00", img: "img/cardapio/espeto-carne.jpg" },
         { nome: "Espeto de Frango",    desc: "",                  preco: "20,00", img: "img/cardapio/espeto-frango.jpg" },
         { nome: "Espeto de Calabresa", desc: "",                  preco: "20,00", img: "img/cardapio/espeto-calabresa.jpg" },
@@ -37,6 +37,16 @@ const CARDAPIO = {
         { nome: "Calabresa Acebolada",  desc: "400g · serve até 3 pessoas",         preco: "30,00", img: "img/cardapio/calabresa-acebolada.jpg" },
         { nome: "Batata Frita Rústica", desc: "400g · serve até 3 pessoas",         preco: "25,00", img: "img/cardapio/batata-rustica.jpg" },
         { nome: "Batata Frita Palito",  desc: "400g · serve até 3 pessoas",         preco: "25,00", img: "img/cardapio/batata-palito.jpg" },
+      ],
+    },
+    {
+      categoria: "Pratos",
+      icone: "🍖",
+      nota: "Pratos completos pra compartilhar (servem a mesa toda).",
+      itens: [
+        { nome: "Picanha",         desc: "500g · serve 2 · batata frita, arroz, vinagrete/batatonese e farofa",   preco: "130,00", img: "" },
+        { nome: "Galinha Caipira", desc: "Inteira · serve 4 · macarrão, arroz e farofa",                           preco: "120,00", img: "" },
+        { nome: "Tambaqui",        desc: "Banda · serve 3 · salada de feijão fradinho, arroz, vinagrete e farofa",  preco: "130,00", img: "" },
       ],
     },
   ],
