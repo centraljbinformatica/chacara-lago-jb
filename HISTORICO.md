@@ -4,7 +4,7 @@
 > **as decisões** e **o que ainda falta**. Serve como memória do projeto pra qualquer pessoa
 > (ou IA) que pegar o trabalho do zero entender tudo.
 >
-> Última atualização: **18/06/2026**
+> Última atualização: **20/07/2026**
 
 ---
 
@@ -49,9 +49,12 @@ Essas regras valem pra qualquer texto/visual novo no site:
 |---|---|
 | `index.html` | Página principal (capa, sobre, números, atrações, fotos, efeito morph, ingresso, contato). |
 | `cardapio.html` | Página do cardápio (monta o menu via JS). |
-| `menu.js` | **Dados do cardápio** (itens, preços, fotos). É aqui que se edita o cardápio. |
+| `menu.js` | **Dados do cardápio** (itens, preços, fotos). É aqui que se edita o cardápio. Serve tanto o cardápio digital quanto a comanda impressa. |
 | `script.js` | Lógica: monta o menu, efeitos interativos (morph, contagem, tilt, reveal, etc). |
 | `style.css` | Todo o visual e as animações. |
+| `comanda-impressa.html` | **Comandas para imprimir** (folhas de pedido P&B). Gera os PDFs em `pdf/` a partir do `menu.js`. Aceita parâmetros na URL (`?tipo=comida/bebida&modo=lado/3/4` ou `&num=100`). |
+| `comanda.html` | Página de **pedido digital** (diferente do `cardapio.html`). O botão "↤ Digital" da comanda impressa aponta pra cá de propósito. |
+| `pdf/` | PDFs prontos das comandas (2/3/4 por folha e numeradas 1-100). |
 | `qrcode.html` | Gerador de QR Code apontando pro cardápio. |
 | `processar-fotos.ps1` | Script PowerShell que padroniza fotos (recorta pra 400x400). |
 | `COMO-EDITAR.md` | Guia rápido de como mexer no cardápio sem saber programar. |
@@ -63,13 +66,13 @@ Pra usar foto real, trocar o arquivo dentro de `img/cardapio/` mantendo o mesmo 
 
 ---
 
-## 4. Cardápio atual (estado em 18/06/2026)
+## 4. Cardápio atual (estado em 20/07/2026)
 
 ### Comidas
 
 **Espetos** 🍢 — _acompanham arroz, farofa e batatonese/vinagrete. Medalhões vêm com molho mostarda e mel._
-- Medalhão de Carne (carne e bacon) — R$25
-- Medalhão de Frango (frango e bacon) — R$25
+- Medalhão de Carne (carne e bacon) — R$30
+- Medalhão de Frango (frango e bacon) — R$30
 - Espeto de Carne — R$20
 - Espeto de Frango — R$20
 - Espeto de Calabresa — R$20
@@ -82,6 +85,11 @@ Pra usar foto real, trocar o arquivo dentro de `img/cardapio/` mantendo o mesmo 
 - Calabresa Acebolada (400g) — R$30
 - Batata Frita Rústica (400g) — R$25
 - Batata Frita Palito (400g) — R$25
+
+**Pratos** 🍖 — _pratos completos pra compartilhar (servem a mesa toda). Todos com foto real._
+- Picanha (500g, serve 2) — batata frita, arroz, vinagrete/batatonese e farofa — R$130
+- Galinha Caipira (inteira, serve 4) — macarrão, arroz e farofa — R$130
+- Tambaqui (banda, serve 3) — salada de feijão fradinho, arroz, vinagrete e farofa — R$130
 
 ### Bebidas
 
@@ -113,6 +121,17 @@ Pra usar foto real, trocar o arquivo dentro de `img/cardapio/` mantendo o mesmo 
 ## 5. Linha do tempo das alterações (mais recente em cima)
 
 > Histórico real de commits do projeto. Resume cada etapa do trabalho.
+
+### Rodada de julho/2026 (comandas impressas + atualização do cardápio)
+
+- **Galinha Caipira R$120 → R$130** — igualando os três pratos a R$130.
+- **Fotos reais nos pratos novos** — Picanha, Galinha Caipira e Tambaqui com foto de verdade, otimizadas pra web (máx. ~500px, ~50-78KB) em `img/cardapio/`.
+- **Medalhões R$25 → R$30** (carne e frango) e **nova categoria "Pratos"** no cardápio digital e na comanda (Picanha, Galinha Caipira, Tambaqui). Na comanda, a Galinha que ficava solta nos Petiscos saiu (agora vem de Pratos) e o layout 2x2 foi recompactado pra caber em 1 folha **sem mudar a fonte**. PDFs de comida regerados.
+- **Comandas de impressão P&B** — paleta em tons de cinza escuro (imprime nítido), comida com faixa sólida e bebida com faixa (depois unificadas em sólidas), emojis removidos das categorias (não imprimem bem em mono). Campos das folhas viraram **Nome + Nº de pessoas** (era Mesa/Garçom/Data). Criadas as versões **numeradas 1-100** (comida 2x2 = 25 folhas; bebida lado a lado = 50 folhas), cada uma com botão e PDF pronto.
+
+> Regra de ouro das comandas: cada folha tem que caber em **1 página A4**. Se estourar, aperta o respiro do layout (espaçamento/margens) mas **nunca diminui a fonte** (regra do dono). Validar contando as páginas do PDF, não pela tela.
+
+### Rodadas anteriores
 
 1. **Linha separadora laranja + "+10 Atividades"** — separador dos drinks mais grosso (3px) e laranja; número "6 formas de curtir" virou "+10 Atividades".
 2. **Correções mobile** — removidos os "orbs" de luz (marcavam a lateral, ficou estranho); números (stats) passam a mostrar os valores certos quando o efeito não roda, em vez de zerados.
