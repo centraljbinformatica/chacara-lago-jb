@@ -80,7 +80,7 @@ Pra usar foto real, trocar o arquivo dentro de `img/cardapio/` mantendo o mesmo 
 
 **Petiscos** 🍟 _(todos servem até 3 pessoas)_
 - Isca de Pirarucu (500g) — R$50
-- Bolinho de Piracuí (12 un.) — R$35
+- Bolinho de Piracuí (10 un.) — R$30
 - Isca de Frango (400g) — R$35
 - Calabresa Acebolada (400g) — R$30
 - Batata Frita Rústica (400g) — R$25
@@ -124,6 +124,7 @@ Pra usar foto real, trocar o arquivo dentro de `img/cardapio/` mantendo o mesmo 
 
 ### Rodada de julho/2026 (comandas impressas + atualização do cardápio)
 
+- **Bolinho de Piracuí** — passou de 12 unidades/R$50 para **10 unidades/R$30**. PDFs de comida regerados e validados (1 folha).
 - **Galinha Caipira R$120 → R$130** — igualando os três pratos a R$130.
 - **Fotos reais nos pratos novos** — Picanha, Galinha Caipira e Tambaqui com foto de verdade, otimizadas pra web (máx. ~500px, ~50-78KB) em `img/cardapio/`.
 - **Medalhões R$25 → R$30** (carne e frango) e **nova categoria "Pratos"** no cardápio digital e na comanda (Picanha, Galinha Caipira, Tambaqui). Na comanda, a Galinha que ficava solta nos Petiscos saiu (agora vem de Pratos) e o layout 2x2 foi recompactado pra caber em 1 folha **sem mudar a fonte**. PDFs de comida regerados.

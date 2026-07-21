@@ -32,7 +32,7 @@ const CARDAPIO = {
       icone: "🍟",
       itens: [
         { nome: "Isca de Pirarucu",     desc: "500g · serve até 3 pessoas",         preco: "50,00", img: "img/cardapio/isca-pirarucu.jpg" },
-        { nome: "Bolinho de Piracuí",   desc: "12 unidades · serve até 3 pessoas",  preco: "50,00", img: "img/cardapio/bolinho-piracui.jpg" },
+        { nome: "Bolinho de Piracuí",   desc: "10 unidades · serve até 3 pessoas",  preco: "30,00", img: "img/cardapio/bolinho-piracui.jpg" },
         { nome: "Isca de Frango",       desc: "400g · serve até 3 pessoas",         preco: "35,00", img: "img/cardapio/isca-frango.jpg" },
         { nome: "Calabresa Acebolada",  desc: "400g · serve até 3 pessoas",         preco: "30,00", img: "img/cardapio/calabresa-acebolada.jpg" },
         { nome: "Batata Frita Rústica", desc: "400g · serve até 3 pessoas",         preco: "25,00", img: "img/cardapio/batata-rustica.jpg" },
