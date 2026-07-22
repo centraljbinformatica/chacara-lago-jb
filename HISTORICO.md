@@ -124,6 +124,7 @@ Pra usar foto real, trocar o arquivo dentro de `img/cardapio/` mantendo o mesmo 
 
 ### Rodada de julho/2026 (comandas impressas + atualização do cardápio)
 
+- **Seção de ingresso reformulada** — passou a mostrar dois valores: R$5/pessoa nos dias abertos ao público (sex/sáb/dom, feriados e festival, crianças até 5 anos não pagam) e R$30/pessoa nos dias exclusivos da semana (com reserva prévia). Nota de eventos privativos (valor à parte). Card novo no `index.html`.
 - **Isca de Frango** — de R$35 para **R$30**. PDFs de comida regerados e validados (1 folha).
 - **Bolinho de Piracuí** — passou de 12 unidades/R$50 para **10 unidades/R$30**. PDFs de comida regerados e validados (1 folha).
 - **Galinha Caipira R$120 → R$130** — igualando os três pratos a R$130.
@@ -182,7 +183,10 @@ maquininhas na estreia. Recomendações dadas:
 **Precificação dos drinks:** custo dos ingredientes ÷ 0,30 (ingredientes = 25–35% do preço de venda).
 Drinks fixados em R$20 pra viabilizar o happy hour "2 por R$30".
 
-**Ingresso:** R$5. Crianças até 5 anos não pagam.
+**Ingresso (a partir de jul/2026):** dois valores conforme o dia.
+- **Dias abertos ao público** (sexta, sábado, domingo, alguns feriados e dias de festival): **R$5/pessoa**; crianças até 5 anos não pagam.
+- **Dias exclusivos** (dias úteis, fechados ao público geral): **R$30/pessoa**, mediante reserva prévia (confirmar disponibilidade do sítio no dia).
+- **Eventos privativos:** valor consultado à parte na hora da reserva.
 
 ---
 
