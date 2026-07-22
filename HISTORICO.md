@@ -185,8 +185,8 @@ Drinks fixados em R$20 pra viabilizar o happy hour "2 por R$30".
 
 **Ingresso (a partir de jul/2026):** dois valores conforme o dia.
 - **Dias abertos ao público** (sexta, sábado, domingo, alguns feriados e dias de festival): **R$5/pessoa**; crianças até 5 anos não pagam.
-- **Dias exclusivos** (dias úteis, fechados ao público geral): **R$30/pessoa**, mediante reserva prévia (confirmar disponibilidade do sítio no dia).
-- **Eventos privativos:** valor consultado à parte na hora da reserva.
+- **Dias exclusivos** (dias úteis, fechados ao público geral): **R$30/pessoa**, mediante reserva prévia (confirmar disponibilidade da chácara no dia).
+- **Eventos privativos:** valor consultado à parte na hora da reserva (card próprio na seção de ingresso).
 
 ---
 
