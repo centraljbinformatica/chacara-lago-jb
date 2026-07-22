@@ -238,9 +238,6 @@ code { background: #eef2f6; padding: 1px 6px; border-radius: 6px; font-size: .9e
 
 /* ======================= CONTATO ======================= */
 .info-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 30px; }
-/* Aviso oficial dos proprietários: sutil, mas destacado */
-.owner-note { max-width: 760px; margin: -8px auto 30px; text-align: center; font-size: 14.5px; line-height: 1.5; color: var(--azul); background: #eef3fa; border: 1px solid var(--borda); border-radius: 14px; padding: 13px 20px; }
-.owner-note strong { color: var(--laranja-esc); }
 .cta-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
 
 /* ======================= RODAPÉ ======================= */
