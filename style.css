@@ -205,6 +205,8 @@ code { background: #eef2f6; padding: 1px 6px; border-radius: 6px; font-size: .9e
 .card p { color: var(--cinza); }
 .price-tag { font-family: "Inter", sans-serif; font-size: 40px; font-weight: 800; color: var(--laranja-esc); margin: 6px 0; }
 .price-tag small { font-size: 16px; color: var(--cinza); font-weight: 500; }
+/* Rótulo de texto (ex.: "Sob consulta"), menor pra caber em uma linha e alinhar com os preços */
+.price-tag--txt { font-size: 22px; letter-spacing: .2px; white-space: nowrap; line-height: 40px; }
 .note { font-size: 14px; color: var(--cinza); margin-top: 10px; }
 
 /* ======================= RESERVA (mini formulário) ======================= */
