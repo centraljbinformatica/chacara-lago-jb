@@ -200,6 +200,9 @@ code { background: #eef2f6; padding: 1px 6px; border-radius: 6px; font-size: .9e
 
 /* ======================= CARDS GERAIS (ingresso/info) ======================= */
 .card-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-bottom: 30px; }
+/* Variante 2 colunas fixas (ex.: ingresso em 2x2) */
+.card-grid--2 { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 600px) { .card-grid--2 { grid-template-columns: 1fr; } }
 .card { background: #fff; border: 1px solid var(--borda); border-radius: var(--raio); padding: 26px; box-shadow: var(--sombra); }
 .card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--azul); }
 .card p { color: var(--cinza); }
@@ -235,6 +238,9 @@ code { background: #eef2f6; padding: 1px 6px; border-radius: 6px; font-size: .9e
 
 /* ======================= CONTATO ======================= */
 .info-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 30px; }
+/* Aviso oficial dos proprietários: sutil, mas destacado */
+.owner-note { max-width: 760px; margin: -8px auto 30px; text-align: center; font-size: 14.5px; line-height: 1.5; color: var(--azul); background: #eef3fa; border: 1px solid var(--borda); border-radius: 14px; padding: 13px 20px; }
+.owner-note strong { color: var(--laranja-esc); }
 .cta-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
 
 /* ======================= RODAPÉ ======================= */

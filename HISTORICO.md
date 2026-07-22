@@ -124,7 +124,10 @@ Pra usar foto real, trocar o arquivo dentro de `img/cardapio/` mantendo o mesmo 
 
 ### Rodada de julho/2026 (comandas impressas + atualização do cardápio)
 
-- **Seção de ingresso reformulada** — único valor cobrado é R$5/pessoa nos dias abertos ao público (sex/sáb/dom, feriados e festival; crianças até 5 anos não pagam). Dias exclusivos (semana) e eventos privativos viraram cards "Sob consulta": disponibilidade e valores combinados antecipadamente com os proprietários. (O R$30/pessoa que chegou a entrar foi removido.) Alterações no `index.html`.
+- **Proprietários oficiais destacados** — o site agora deixa claro que a chácara é do **João Belém** ((92) 99215-2111) e da **Hailer Belém** ((92) 99396-7080), e que só eles (pelo WhatsApp deles, enquanto o oficial está sendo configurado, ou pelo Instagram oficial @chacaralagojb) confirmam reserva, liberam entrada e passam valores. Motivo: gente se passando por dono. Fica na seção "Onde estamos" (linha de destaque + box `.owner-note`) e também no texto da seção de reserva.
+- **Seção de atrações reescrita** — título passou a "🎶 Consulte a atração do dia": a programação varia a cada fim de semana (alguns dias música ao vivo, outros atrações no rio) e a atração do dia é sempre divulgada no Instagram. Evita prometer música todo dia e direciona pro @chacaralagojb.
+- **Ingresso em 2×2** — os 4 cards viraram duas colunas de dois (classe `.card-grid--2`): R$5 e "Pague na hora" em cima; "Dias exclusivos" e "Eventos privativos" embaixo. No celular vira coluna única.
+- **Seção de ingresso reformulada** — único valor cobrado é R$5/pessoa nos dias abertos ao público (sex/sáb/dom, feriados e festival; crianças até 5 anos não pagam). Dias exclusivos (semana) e eventos privativos viraram cards "Sob consulta"/"Mediante reserva": disponibilidade e valores combinados antecipadamente com os proprietários. (O R$30/pessoa que chegou a entrar foi removido.) Alterações no `index.html`.
 - **Isca de Frango** — de R$35 para **R$30**. PDFs de comida regerados e validados (1 folha).
 - **Bolinho de Piracuí** — passou de 12 unidades/R$50 para **10 unidades/R$30**. PDFs de comida regerados e validados (1 folha).
 - **Galinha Caipira R$120 → R$130** — igualando os três pratos a R$130.
