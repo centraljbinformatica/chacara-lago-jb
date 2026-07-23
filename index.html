@@ -27,7 +27,11 @@
     "name": "Chácara Lago JB",
     "servesCuisine": "Brasileira",
     "description": "Praia particular no coração do Amazonas: areia, flutuante, redes, vôlei, espeto na brasa e banho de rio em Vila Amazônia, Parintins.",
-    "telephone": "+55 92 99396-7080",
+    "url": "https://chacara-lago-jb.vercel.app/",
+    "telephone": "+55 92 99215-2111",
+    "priceRange": "$",
+    "image": "https://chacara-lago-jb.vercel.app/img/capa.jpg",
+    "hasMenu": "https://chacara-lago-jb.vercel.app/cardapio.html",
     "sameAs": ["https://instagram.com/chacaralagojb"],
     "address": {
       "@type": "PostalAddress",
@@ -35,7 +39,14 @@
       "addressLocality": "Vila Amazônia, Parintins",
       "addressRegion": "AM",
       "addressCountry": "BR"
-    }
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Friday", "Saturday", "Sunday"],
+        "opens": "10:00"
+      }
+    ]
   }
   </script>
 </head>
@@ -57,6 +68,7 @@
       <a href="#fotos">Fotos</a>
       <a href="#ingresso">Ingresso</a>
       <a href="#reserva">Reserva</a>
+      <a href="#contato">Contato</a>
       <a href="cardapio.html">Cardápio</a>
     </nav>
   </header>
@@ -124,10 +136,12 @@
   <section id="atracoes" class="section">
     <div class="attractions-box">
       <h2>🎶 Consulte a atração do dia</h2>
-      <p>A programação muda a cada fim de semana. Em alguns dias rola música ao vivo, em outros tem atrações pra diversão no rio. Como nem todo dia é igual, a gente sempre avisa a atração de cada data no nosso Instagram. Dá uma olhada lá antes de vir pra não perder nada.</p>
+      <p>A programação muda a cada fim de semana. Em alguns dias rola música ao vivo, em outros tem atrações pra diversão no rio. Como nem todo dia é igual, a gente sempre avisa a atração de cada data no nosso Instagram. Dá uma olhada lá antes de vir pra não perder nada. E vem mais por aí: karaokê e novas atrações estão a caminho.</p>
       <div class="attractions-tags">
         <span>🎤 Música ao vivo em alguns dias</span>
         <span>🌊 Diversão no rio</span>
+        <span>🎶 Karaokê em breve</span>
+        <span>✨ Novidades chegando</span>
         <span>📲 Programação no Instagram</span>
       </div>
       <a class="btn" style="background:#fff;color:#d9641a;margin-top:26px;" href="https://instagram.com/chacaralagojb" target="_blank" rel="noopener">📸 Ver a atração do dia no @chacaralagojb</a>
@@ -142,7 +156,7 @@
       <p class="section-desc">Precisa de reserva ou quer falar sobre algo do local? Entre em contato diretamente com os proprietários da Chácara Lago JB ou pelo Instagram oficial:</p>
     </div>
     <div class="cta-row">
-      <a class="btn btn-whats" target="_blank" rel="noopener" href="https://wa.me/5592992152111?text=Ol%C3%A1!%20Vi%20o%20site%20da%20Ch%C3%A1cara%20Lago%20JB%20e%20queria%20falar%20sobre%20uma%20reserva%2Finforma%C3%A7%C3%B5es.">💬 João Belém</a>
+      <a class="btn btn-whats" target="_blank" rel="noopener" href="https://wa.me/5592992152111?text=Ol%C3%A1!%20Vi%20o%20site%20da%20Ch%C3%A1cara%20Lago%20JB%20e%20queria%20falar%20sobre%20uma%20reserva%2Finforma%C3%A7%C3%B5es.">💬 João Belém (JB)</a>
       <a class="btn btn-whats" target="_blank" rel="noopener" href="https://wa.me/5592993967080?text=Ol%C3%A1!%20Vi%20o%20site%20da%20Ch%C3%A1cara%20Lago%20JB%20e%20queria%20falar%20sobre%20uma%20reserva%2Finforma%C3%A7%C3%B5es.">💬 Hailer Belém</a>
       <a class="btn btn-primary" target="_blank" rel="noopener" href="https://instagram.com/chacaralagojb">📸 Instagram oficial</a>
     </div>
@@ -238,7 +252,7 @@
     <div class="section-head">
       <p class="eyebrow">Festas e eventos</p>
       <h2>Reserve o espaço</h2>
-      <p class="section-desc">Quer comemorar na chácara? A churrasqueira e o espaço podem ser reservados pra festas e eventos privados. Preencha os dados abaixo pra confirmar a disponibilidade da data e consultar os valores diretamente com os proprietários, o João Belém e a Hailer Belém. A reserva só é confirmada por eles.</p>
+      <p class="section-desc">Quer comemorar na chácara? A churrasqueira e o espaço podem ser reservados pra festas e eventos privados. Preencha os dados abaixo pra confirmar a disponibilidade da data e consultar os valores diretamente com os proprietários, o João Belém (JB) e a Hailer Belém. A reserva só é confirmada por eles.</p>
     </div>
     <form class="form" id="form-reserva" onsubmit="return enviarReserva(event)">
       <label for="r-nome">Seu nome</label>
