@@ -80,7 +80,7 @@ Pra usar foto real, trocar o arquivo dentro de `img/cardapio/` mantendo o mesmo 
 
 **Petiscos** 🍟 _(todos servem até 3 pessoas)_
 - Isca de Pirarucu (500g) — R$50
-- Bolinho de Piracuí (10 un.) — R$30
+- Bolinho de Piracuí (10 un.) — R$35
 - Isca de Frango (400g) — R$30
 - Calabresa Acebolada (400g) — R$30
 - Batata Frita Rústica (400g) — R$25
